@@ -33,11 +33,20 @@ public class ChageScene : MonoBehaviour
 
     public bool Test;
 
+    public enum ChangeType
+    {
+        Fade,
+        TimeLimit
+    }
+
     public enum FadeType
     {
         FadeIn,
         FadeOut,
     };
+
+    [SerializeField]
+    private ChangeType _cangetype;
 
     [SerializeField]
     private FadeType _fadetype;
@@ -74,9 +83,38 @@ public class ChageScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        switch (_cangetype)
+        { 
+            case ChangeType.TimeLimit:
+                StartCoroutine(LimitMove());
+                break;
+            case ChangeType.Fade:
+                StartCoroutine(fadeMove());
+                break;
+        }   
+    }
+
+    public void PushStart()
+    {
+        Test = true;
+    }
+
+    public void SetFadeColor(Color change)
+    {
+        GetComponent<FadeImage>().SetColor(change);
+    }
+
+    private IEnumerator LimitMove()
+    {
+        yield return new WaitForSeconds(_fadeTime);
+        LoadScene();
+    }
+
+    private IEnumerator fadeMove()
+    {
         if (Test)
         {
-            switch(_fadetype)
+            switch (_fadetype)
             {
                 case FadeType.FadeIn:
                     fade.FadeIn(_fadeTime);
@@ -102,35 +140,8 @@ public class ChageScene : MonoBehaviour
                     break;
             }
         }
+        yield break;
     }
-
-    public void PushStart()
-    {
-        Test = true;
-    }
-
-    public void SetFadeColor(Color change)
-    {
-        GetComponent<FadeImage>().SetColor(change);
-    }
-
-    //private void fade()
-    //{
-    //    _currntTime += Time.deltaTime;
-    //    switch (_fadetype)
-    //    {
-    //        case FadeType.FadeIn:
-    //            _alpha.a = 1.0f - (_currntTime) / _fadeTime;
-    //            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, _alpha.a);
-    //            if (_alpha.a < 0) { Test = !Test; _fadetype = FadeType.FadeOut;}
-    //            break;
-    //        case FadeType.FadeOut:
-    //            _alpha.a = (_currntTime) / _fadeTime;
-    //            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, _alpha.a);
-    //            if (_alpha.a > 1) LoadScene();
-    //            break;
-    //    }
-    //}
 
     private void LoadScene()
     {

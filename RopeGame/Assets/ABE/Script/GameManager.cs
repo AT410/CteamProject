@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
             state.ChangeState(TestState2.Instance());
         }
         //ChackNumObj();
+        SleepObj();
     }
 
     /// <summary>
@@ -57,16 +58,32 @@ public class GameManager : MonoBehaviour
     }
 
     //生成関数
-    IEnumerator CreateObject()
+    public IEnumerator CreateObject()
     {
-        var s = GameObject.Instantiate(Test);
-        Objects.Enqueue(s);
-        yield return new WaitForSeconds(0.5f);
+        while(Objects.Count != MaxNumObjects)
+        {
+            var s = GameObject.Instantiate(Test);
+            Objects.Enqueue(s);
+            yield return new WaitForSeconds(1.0f);
+        }
+        if (Objects.Count == MaxNumObjects)
+            yield break;
     }
+
     //死亡管理
     private void SleepObj()
     {
-        
+        //敵の死亡判定を取る
+        foreach(var Deat in Objects)
+        {
+            if(Deat)
+            {
+                //非アクティブ化
+                Deat.SetActive(false);
+                //死亡時のAnimetionを再生
+                //終了したらSleepさせる
+            }
+        }
     }
 
 }
@@ -88,12 +105,12 @@ public class TestState : ObjState<GameManager>
 
     public override void Enter(ref GameManager other)
     {
-        Debug.Log("EnterState1");
+        other.StartCoroutine(other.CreateObject());
     }
 
     public override void Execute(ref GameManager other)
     {
-        //Debug.Log("ExcuteState1");
+
     }
 
     public override void Exit(ref GameManager other)
