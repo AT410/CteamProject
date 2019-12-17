@@ -326,7 +326,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &960347076
 GameObject:
@@ -667,7 +667,7 @@ Transform:
   - {fileID: 128017893}
   - {fileID: 1792295504}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1184342800
 GameObject:
@@ -906,7 +906,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1197079754
 GameObject:
@@ -1091,7 +1091,7 @@ GameObject:
   - component: {fileID: 1752803660}
   - component: {fileID: 1752803659}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1106,7 +1106,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1752803658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 249986c83c1e6db4ca4730be1ce6fd73, type: 3}
+  m_Script: {fileID: 11500000, guid: f2f238347bbed6e4888bdd1d289bf0a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rope: {fileID: 1008233954}
@@ -1198,7 +1198,7 @@ Transform:
   - {fileID: 1008233955}
   - {fileID: 1197079755}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1792295500
 GameObject:

@@ -6,7 +6,7 @@ public class TestAudio : MonoBehaviour
 {
     private void Start()
     {
-        AudioManager.Instance.PlayBGM("Title");  //タイトルSE再生
+        AudioManager.Instance.PlayBGM("Title");  //タイトルBGM再生
     }
 
     void Update()
