@@ -31,12 +31,18 @@ public class PlayerBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Instantiate(impactEffect, transform.position, transform.rotation);
-        PlayerController.instance.playerTrans.position = PlayerBullet.instance.bulletTrans.position;
-
         Destroy(gameObject);
+        Instantiate(impactEffect, transform.position, transform.rotation);
+        if (other.tag == "Scenary")
+        {
+            PlayerController.instance.playerTrans.position = PlayerBullet.instance.bulletTrans.position;
+        }
+        if (other.tag == "Item")
+        {
+            ItemController.instance.itemTrans.position = new Vector3(PlayerController.instance.playerTrans.position.x, PlayerController.instance.playerTrans.position.y - 1, PlayerController.instance.playerTrans.position.z);
+        }
 
-        if(other.tag == "Enemy")
+        if (other.tag == "Enemy")
         {
             other.GetComponent<EnemyController>().DamageEnemy(damageToGive);
         }

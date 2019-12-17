@@ -36,6 +36,12 @@ public class PlayerController : MonoBehaviour
     private float dashCounter;
     private float dashCoolCounter;
 
+    [SerializeField]
+    private float attackTime = 0.3f;
+
+    private bool attacking = false;
+    private float attackTimeCounter;
+
     private void Awake()
     {
         instance = this;
@@ -51,6 +57,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Functions to call
+
+        //Character movement
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
 
@@ -58,6 +67,69 @@ public class PlayerController : MonoBehaviour
 
         theRB.velocity = moveInput * activeMoveSpeed;
 
+        anim.SetFloat("moveX", theRB.velocity.x);
+        anim.SetFloat("moveY", theRB.velocity.y);
+
+        if (Input.GetAxisRaw("Horizontal") == 1 || Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Vertical") == -1)
+        {
+            anim.SetFloat("lastMoveX", Input.GetAxisRaw("Horizontal"));
+            anim.SetFloat("lastMoveY", Input.GetAxisRaw("Vertical"));
+        }
+
+        if(Input.GetButtonDown("Fire1"))
+        {
+            attackTimeCounter = attackTime;
+            attacking = true;
+            theRB.velocity = Vector2.zero;
+            anim.SetBool("attacking", true);
+        }
+
+        if(attackTimeCounter > 0)
+       {
+            attackTimeCounter -= Time.deltaTime;
+       }
+
+       if(attackTimeCounter <= 0)
+       {
+          attacking = false;
+          anim.SetBool("attacking", false);
+       }
+
+        //Dash
+        if (Input.GetButtonDown("Dodge"))
+        {
+            if (dashCoolCounter <= 0 && dashCounter <= 0)
+            {
+                activeMoveSpeed = dashSpeed;
+                dashCounter = dashLength;
+
+                anim.SetTrigger("dash");
+
+                PlayerHealthController.instance.MakeInvincible(dashInvincibility);
+            }
+        }
+
+        if (dashCounter > 0)
+        {
+            dashCounter -= Time.deltaTime;
+            if (dashCounter <= 0)
+            {
+                activeMoveSpeed = moveSpeed;
+                dashCoolCounter = dashCooldown;
+            }
+        }
+
+        if (dashCoolCounter > 0)
+        {
+            dashCoolCounter -= Time.deltaTime;
+        }
+
+    }
+}
+
+        /*
+
+        //Rotation of character and gun together
         Vector3 mousePos = Input.mousePosition;
         Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
 
@@ -78,18 +150,18 @@ public class PlayerController : MonoBehaviour
         gunArm.rotation = Quaternion.Euler(0, 0, angle);
 
         //Shoot
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
             shotCounter = TimeBetweenShots;
         }
 
         //Continue to shooting (Burst)
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             shotCounter -= Time.deltaTime;
 
-            if(shotCounter <= 0)
+            if (shotCounter <= 0)
             {
                 Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
 
@@ -97,39 +169,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            if(dashCoolCounter <= 0 && dashCounter <= 0)
-            {
-                activeMoveSpeed = dashSpeed;
-                dashCounter = dashLength;
-            }
-        }
-
-        if(dashCounter > 0)
-        {
-            dashCounter -= Time.deltaTime;
-            if(dashCounter <= 0)
-            {
-                activeMoveSpeed = moveSpeed;
-                dashCoolCounter = dashCooldown;
-            }
-        }
-
-        if (dashCoolCounter > 0)
-        {
-            dashCoolCounter -= Time.deltaTime;
-        }
-
-
-        if(moveInput != Vector2.zero)
-        {
-            anim.SetBool("isMoving", true);
-        }
-        else
-        {
-            anim.SetBool("isMoving", false);
-        }
+        
 
     }
+
 }
+
+
+
+    */
+    
