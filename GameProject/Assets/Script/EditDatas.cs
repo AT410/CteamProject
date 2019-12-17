@@ -67,6 +67,14 @@ public class EditDatas : EditorWindow
                 GUI.backgroundColor = defaultColor;
                 _result.GetDelFlag = EditorGUILayout.Toggle(_result.GetDelFlag);
             }
+            GUI.backgroundColor = defaultColor;
+            using (new GUILayout.HorizontalScope(EditorStyles.toolbar))
+            {
+                GUI.backgroundColor = Color.magenta;
+                GUILayout.Label("MoveSpeed");
+                GUI.backgroundColor = defaultColor;
+                _result.ISMoveSpeed = EditorGUILayout.FloatField(_result.ISMoveSpeed);
+            }
 
         }
 

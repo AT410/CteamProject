@@ -11,6 +11,9 @@ public class ObjectData : ScriptableObject
     /// </summary>
     public ObjectType type;
 
+    [SerializeField]
+    protected float MoveSpeed;
+
     //時間制限で消えるかどうか
     [SerializeField]
     protected bool IsLimitActive=false;
@@ -26,6 +29,20 @@ public class ObjectData : ScriptableObject
         set
         {
             IsLimitActive = value;
+        }
+#endif
+    }
+
+    public float ISMoveSpeed
+    {
+        get
+        {
+            return MoveSpeed;
+        }
+#if UNITY_EDITOR
+        set
+        {
+            MoveSpeed = value;
         }
 #endif
     }
