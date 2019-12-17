@@ -9,15 +9,13 @@ public class HookShot2 : MonoBehaviour
     RaycastHit2D hit;
     public float distance = 10f;
     public LayerMask mask;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         joint = GetComponent<DistanceJoint2D>();
         joint.enabled = false;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
