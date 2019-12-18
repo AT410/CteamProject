@@ -99,7 +99,7 @@ public class ZombieController : EnemyBase
   
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player"&&state !="caught")
+        if (collision.gameObject.name == "Player"&& state !="Caught")
         {
             m_currentTime2 += Time.deltaTime;
             if (m_shotTime < m_currentTime2)
