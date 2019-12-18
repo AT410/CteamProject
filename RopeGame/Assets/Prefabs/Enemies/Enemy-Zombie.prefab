@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 7447745062991019195}
   - component: {fileID: 996339865059783710}
   m_Layer: 10
-  m_Name: Enemy-Skeleton (1)
+  m_Name: Enemy-Zombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 0.03
-  playerDistance: 8
+  playerDistance: 1
 --- !u!50 &5408702153222221778
 Rigidbody2D:
   serializedVersion: 4
@@ -291,7 +291,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5882195214289570866}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.73, y: -4.23, z: 0}
+  m_LocalPosition: {x: -0.04, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5408702153222221807}

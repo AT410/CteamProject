@@ -12,7 +12,8 @@ public class newHookShot : MonoBehaviour
     bool move = false;      //プレイヤーが移動しているか判断する変数
     float hori = 0;
     float vert = 0;
-    float stickAngle = 0.63f;
+    int nextStickAngle = 0;
+    int stickAngle = 3;
     Vector3 oldMousePos = new Vector3(242.5f, 136.5f, 0);
     bool horiVert = false;
 
@@ -27,23 +28,21 @@ public class newHookShot : MonoBehaviour
         line.endWidth = 0.1f;                                                   //〃
         rope.SetActive(false);                                                  //ラインを使うまで隠しておく
     }
-    
+
+
     void Update()
     {
         hori = Input.GetAxis("Horizontal2");
         vert = Input.GetAxis("Vertical2");
 
-        if (Input.GetKeyDown("joystick button 1")) RopeCut();
-        if(!move)
-        {
-            if (Input.GetKeyDown("joystick button 5")) ObjectDesignation();
-            if (Input.GetMouseButtonDown(0)) ObjectDesignation();
-        }
+        if (Input.GetKeyDown("joystick button 5")) ObjectDesignation();
+        if (Input.GetMouseButtonDown(1)) ObjectDesignation();
+
         if (move)
         {
             //コントローラ用
-            if (horiVert && (hori >= stickAngle || hori <= -stickAngle)) PullIn();
-            else if (!horiVert && (vert >= stickAngle || vert <= -stickAngle)) PullIn();
+            if (horiVert && (hori >= 0.63 || hori <= -0.63)) PullIn();
+            else if (!horiVert && (vert >= 0.63 || vert <= -0.63)) PullIn();
             
             //パソコン用
             if (Input.mouseScrollDelta.y != 0) PullIn();
@@ -69,15 +68,15 @@ public class newHookShot : MonoBehaviour
         Debug.DrawRay(transform.position, vec * 10, Color.red, 3);
         if (hit.collider != null)
         {
-            if (hit.collider.gameObject != gameObject)
+           
+            if (hit.collider.gameObject != gameObject&&!hit.collider.gameObject.CompareTag("Bullet"))
             {
-                //GetComponent<Test1>().enabled = false;
-                //if (targ != null && targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().SleepState();
+                if (targ != null && targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().SleepState();
                 targ = hit.collider.gameObject;
                 dist = Vector3.Distance(transform.position, targ.transform.position); //現在位置と選択したオブジェクトまでの距離を測る
                 move = true;
                 rope.SetActive(true);
-                //if(targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().EscapeState();
+                if(targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().EscapeState();
                 //線の座標指定
                 line.SetPosition(0, transform.position);
                 line.SetPosition(1, targ.transform.position);
@@ -88,21 +87,28 @@ public class newHookShot : MonoBehaviour
     void PullIn()
     {
         nowDist = Vector3.Distance(transform.position, targ.transform.position); //現在位置と選択したオブジェクトまでの距離を測る
-
-        //指定したオブジェクトを引き寄せるor指定したオブジェクトまで移動する
-        switch (targ.tag)
+        
+        if(targ.CompareTag("Enemy"))
         {
-            case "Enemy": targ.transform.position = Vector3.MoveTowards(targ.transform.position, transform.position, dist * 3 * Time.deltaTime); break;
-            case "Item": targ.transform.position = Vector3.MoveTowards(targ.transform.position, transform.position, dist * 3 * Time.deltaTime); break;
-            default: transform.position = Vector3.MoveTowards(transform.position, targ.transform.position, dist * 3 * Time.deltaTime); break;
+            targ.transform.position = Vector3.MoveTowards(targ.transform.position, transform.position, dist * 3 * Time.deltaTime);
         }
+        else if (targ.CompareTag("Item"))
+        {
+            targ.transform.position = Vector3.MoveTowards(targ.transform.position, transform.position, dist * 3 * Time.deltaTime);
+        }
+        else
+        {
+            //指定した座標まで移動させる
+            transform.position = Vector3.MoveTowards(transform.position, targ.transform.position, dist * 3 * Time.deltaTime);
+        }
+
+        
 
         if (10 <= nowDist) //敵に逃げられたら止まる
         {
             rope.SetActive(false);
             move = false;
-            //if (targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().SleepState();
-            //GetComponent<Test1>().enabled = true;
+            targ.GetComponent<EnemyBase>().SleepState();
         }
 
         if (0 >= nowDist - 1.5) //オブジェクトまでの距離に対応した時間だけ移動したら止まる
@@ -111,23 +117,12 @@ public class newHookShot : MonoBehaviour
             move = false;
             if (targ.CompareTag("Enemy"))
             {
-                //targ.GetComponent<EnemyBase>().SleepState();
+                targ.GetComponent<EnemyBase>().SleepState();
                 targ.SetActive(false); //仮置き
             }
-            //GetComponent<Test1>().enabled = true;
         }
 
         if (horiVert) horiVert = false;
         else if (!horiVert) horiVert = true;
     }
-
-    void RopeCut()
-    {
-        AudioManager.Instance.PlaySE("RopeCut");  //フックSE再生
-        rope.SetActive(false);
-        move = false;
-        //targ.GetComponent<EnemyBase>().SleepState();
-        //GetComponent<Test1>().enabled = true;
-    }
-
 }

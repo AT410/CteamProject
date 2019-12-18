@@ -2,29 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*Spoli行動ルーチン
+/*Zombie行動ルーチン
   *製作者　篠﨑*/
 public class ZombieController : EnemyBase
 {
     private float m_currentTime = 0;
     private float m_stopTime = 1f;
+    private float m_currentTime2 = 0;//攻撃カウント
+    private float m_shotTime = 0.5f;//攻撃速度
+    const string PLAYERNAME = "Player";//ヒエルラキー上のプレイヤーの名前
     // Update is called once per frame
     //  private string state;
     void Update()
     {
-        if (state == "Sleep")
+        Debug.Log(state);
+        if (state != "Caught")
         {
-            m_currentTime += Time.deltaTime;
-            if (m_stopTime < m_currentTime)
+            if (state == "Sleep")
             {
-                m_currentTime = 0;
-                state = "Randam";
+                m_currentTime += Time.deltaTime;
+                if (m_stopTime < m_currentTime)
+                {
+                    m_currentTime = 0;
+                    state = "RandamMove";
+                }
+            }
+            else
+            {
+                ActionPolicy();
             }
         }
-        else
-        {
-            ActionPolicy();
-        }
+        StateCheck();
     }
     /// <summary>
     /// 行動方針を決定する
@@ -35,7 +43,7 @@ public class ZombieController : EnemyBase
         DistancePlayer();
         //追跡関数
         PlayerChase();
-
+      
         if (m_distance < playerDistance + 1)
         {
             state = "Sleep";
@@ -53,8 +61,6 @@ public class ZombieController : EnemyBase
         {
             state = "RandamMove";
         }
-        StateCheck();
-
     }
     /// <summary>
     /// 状態チェック
@@ -78,7 +84,26 @@ public class ZombieController : EnemyBase
             case ("RandamMove"):
                 RandamMove();
                 break;
+            case ("Caught"):
+                PlayerChase();
+                m_moveX *= -1;
+                m_moveY *= -1;
+                break;
         }
         transform.Translate(m_moveX, m_moveY, 0, Space.World);
+    }
+  
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Player"&& state !="Caught")
+        {
+            m_currentTime2 += Time.deltaTime;
+            if (m_shotTime < m_currentTime2)
+            {
+                //攻撃エフェクトはここに
+                PlayerHealthController.instance.DamagePlayer();
+                m_currentTime2 = 0;
+            }
+        }
     }
 }

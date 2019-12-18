@@ -9,6 +9,18 @@ public class ChageScene : MonoBehaviour
     [Range(0.0f, 5.0f)]
     private float _fadeTime;
 
+    public float FadeTime
+    {
+        get
+        {
+            return _fadeTime;
+        }
+        set
+        {
+            _fadeTime = value;
+        }
+    }
+
     private float _currntTime;
 
     [SerializeField]
@@ -63,14 +75,6 @@ public class ChageScene : MonoBehaviour
         }
     }
 
-
-    public static ChageScene instance;
-
-    private void Awake()
-    {
-        instance = this;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -97,6 +101,7 @@ public class ChageScene : MonoBehaviour
     public void PushStart()
     {
         Test = true;
+        StartCoroutine(fadeMove());
     }
 
     public void SetFadeColor(Color change)

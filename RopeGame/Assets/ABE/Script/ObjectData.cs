@@ -4,12 +4,22 @@ using System;
 using UnityEngine;
 using UnityEditor;
 
+public enum EnemyType
+{
+    Zomib,
+    Thief,
+    Executioner,
+    BOSS
+}
+
 public class ObjectData : ScriptableObject
 {
     /// <summary>
     /// オブジェクト用パラメータデータ
     /// </summary>
     public ObjectType type;
+
+    public EnemyType Etype;
 
     [SerializeField]
     protected float MoveSpeed;
