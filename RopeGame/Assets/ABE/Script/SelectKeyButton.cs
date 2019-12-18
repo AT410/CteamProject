@@ -33,7 +33,7 @@ public class SelectKeyButton : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(Buttons[num]);
     }
 
-    private void EndButtonClick()
+    public void EndButtonClick()
     {
         Application.Quit();
     }
