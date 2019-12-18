@@ -35,7 +35,7 @@ public class newHookShot : MonoBehaviour
         vert = Input.GetAxis("Vertical2");
 
         if (Input.GetKeyDown("joystick button 5")) ObjectDesignation();
-        //if (Input.GetMouseButtonDown(0)) ObjectDesignation();
+        if (Input.GetMouseButtonDown(1)) ObjectDesignation();
 
         if (move)
         {
@@ -69,19 +69,6 @@ public class newHookShot : MonoBehaviour
             else if (nextStickAngle == 1 && oldMousePos.y - 1 > Input.mousePosition.y) PullIn();
             else if (nextStickAngle == 2 && oldMousePos.x - 1 > Input.mousePosition.x) PullIn();
         }
-
-        //テスト用
-        {
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                transform.Rotate(0, 0, -2);
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                transform.Rotate(0, 0, 2);
-            }
-        }
-
     }
 
     /// <summary>
