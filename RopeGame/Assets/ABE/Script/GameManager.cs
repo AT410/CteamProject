@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// MakeCode:Abe Tatsuya
+/// </summary>
 
 public struct CompletValue
 {
@@ -10,31 +13,25 @@ public struct CompletValue
     public int T2;
     public int T3;
 
-    public CompletValue(int AllVal)
+    private int All;
+
+    public CompletValue(int I = 0)
     {
         int Del1, Del2, Del3;
-        int temp = AllVal;
-        do
-        {
-            AllVal = temp;
-            Del1 = Random.Range(2, AllVal - 4);
-            AllVal -= Del1;
-            Del2 = Random.Range(2, AllVal - 4);
-            AllVal -= Del2;
-            Del3 = Random.Range(2, AllVal - 4);
-            AllVal -= Del3;
-
-        } while (AllVal>0 && Del1 <= 2 && Del2 <= 2 && Del3 <= 2);
+        Del1 = Random.Range(3, 6);
+        Del2 = Random.Range(3, 6);
+        Del3 = Random.Range(3, 6);
 
         T1 = Del1;
         T2 = Del2;
         T3 = Del3;
+        All = T1 + T2 + T3;
     }
 
     public float Chack100P()
     {
         var P = T1 + T2 + T3;
-        return P / 100.0f;
+        return 1.0f-(P / All);
     }
 }
 
@@ -80,9 +77,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     [Range(1, 50)]
-    private int QuestEnemyNum;
+    private int QuestEnemyMaxNum;
 
-    private CompletValue MM;
+    public CompletValue QuestData;
 
     //ステートマシン
     StateMachine<GameManager> state;
@@ -98,7 +95,7 @@ public class GameManager : MonoBehaviour
         state = new StateMachine<GameManager>(this);
         Objects = new Queue<GameObject>();
         state.ChangeState(ExecuteSceneState.Instance());
-        MM = new CompletValue(0);
+        QuestData = new CompletValue(0);
         SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
     }
 
@@ -125,6 +122,7 @@ public class GameManager : MonoBehaviour
         //StartCoroutine(CreateObject());
         state.Update();
 
+        Debug.Log(QuestData.T1);
         //ChackNumObj();
         //SleepObj();
     }
@@ -143,8 +141,8 @@ public class GameManager : MonoBehaviour
 
     private void CreateQuest()
     {
-        MM = new CompletValue(QuestEnemyNum);
-        Debug.Log("T1=" + MM.T1.ToString() + "T2=" + MM.T2.ToString() + "T3=" + MM.T3.ToString());
+        //クエスト生成
+        QuestData = new CompletValue(QuestEnemyMaxNum);
     }
 
     //生成関数
@@ -179,6 +177,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void QUIUpdate(EnemyType type)
+    {
+        switch(type)
+        {
+            case EnemyType.Zomib:
+                QuestData.T1 -= 1;
+                break;
+            case EnemyType.Thief:
+                QuestData.T2 -= 1;
+                break;
+            case EnemyType.Executioner:
+                QuestData.T3 -= 1;
+                break;
+        }
+    }
 }
 
 
@@ -204,6 +217,9 @@ public class ExecuteSceneState : ObjState<GameManager>
     public override void Enter(ref GameManager other)
     {
         other.StartCoroutine(other.CreateObject());
+        //クエストUIに値を渡す。
+        //既に渡している場合渡さない
+        UpdateUI(ref other);
     }
 
     public override void Execute(ref GameManager other)
@@ -212,6 +228,7 @@ public class ExecuteSceneState : ObjState<GameManager>
         {
             other.GetStateMachine().ChangeState(PauseSceneState.Instance());
         }
+        UpdateUI(ref other);
     }
 
     public override void Exit(ref GameManager other)
@@ -220,6 +237,17 @@ public class ExecuteSceneState : ObjState<GameManager>
         other.pauseUI.SetActive(true);
         //すべての更新を止める
         Time.timeScale = 0;
+    }
+
+    private void UpdateUI(ref GameManager other)
+    {
+        var E1 = other.QuestData.T1;
+        var E2 = other.QuestData.T2;
+        var E3 = other.QuestData.T3;
+
+        QuestUI.instance.EnemyUI1.text = E1.ToString();
+        QuestUI.instance.EnemyUI2.text = E2.ToString();
+        QuestUI.instance.EnemyUI3.text = E3.ToString();
     }
 }
 

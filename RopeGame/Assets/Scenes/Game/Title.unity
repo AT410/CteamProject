@@ -629,7 +629,7 @@ MonoBehaviour:
   pauseUI: {fileID: 0}
   MaxNumObjects: 0
   _GenerateTime: 0
-  QuestEnemyNum: 11
+  QuestEnemyMaxNum: 12
 --- !u!1 &770421496
 GameObject:
   m_ObjectHideFlags: 0

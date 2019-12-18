@@ -208,6 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_speed: 0.05
   playerDistance: 8
+  _enemyType: 2
   enemyShot: {fileID: 6569757853617251811}
 --- !u!114 &6569757853617251811
 MonoBehaviour:

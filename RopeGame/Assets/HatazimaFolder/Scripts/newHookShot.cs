@@ -117,6 +117,7 @@ public class newHookShot : MonoBehaviour
             if (targ.CompareTag("Enemy"))
             {
                 //targ.GetComponent<EnemyBase>().SleepState();
+                GameManager.GetGameManager().QUIUpdate(targ.GetComponent<EnemyBase>().GetEnemyType());
                 targ.SetActive(false); //仮置き
             }
         }

@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyType
+{
+    Zomib,
+    Thief,
+    Executioner,
+    BOSS
+}
+
 /*敵AI基底行動Script
   *製作者　篠﨑*/
 public class EnemyBase : MonoBehaviour
@@ -23,7 +31,8 @@ public class EnemyBase : MonoBehaviour
     protected float playerDistance = 8.0f;//プレイヤーとの開ける距離
     protected const float MAXDISTANCE = 10.0f;//最大検知範囲
     protected const float MOVEMENT_RANGE = 2f;//最大目的地移動範囲
-   
+    [SerializeField]
+    protected EnemyType _enemyType;
 
     // Start is called before the first frame update
     protected void Start()
@@ -95,6 +104,11 @@ public class EnemyBase : MonoBehaviour
     public void SleepState()
     {
         state = "Sleep";
+    }
+
+    public EnemyType GetEnemyType()
+    {
+        return _enemyType;
     }
 
 }
