@@ -41,8 +41,6 @@ The following packages were added:
   com.unity.modules.vr@1.0.0
   com.unity.modules.wind@1.0.0
   com.unity.modules.xr@1.0.0
-<<<<<<< Updated upstream
-=======
 
 === Wed Dec 18 14:08:54 2019
 
@@ -91,4 +89,3 @@ The following packages were removed:
   com.unity.ugui@1.0.0
   com.unity.xr.legacyinputhelpers@2.0.2
   com.unity.modules.androidjni@1.0.0
->>>>>>> Stashed changes
