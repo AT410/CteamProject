@@ -33,7 +33,8 @@ public class PlayerController : MonoBehaviour
     public float dashLength = .5f;
     public float dashCooldown = 1f;
     public float dashInvincibility = .5f;
-    private float dashCounter;
+    [HideInInspector]
+    public float dashCounter;
     private float dashCoolCounter;
 
     [SerializeField]
