@@ -10,7 +10,7 @@ public class PlayerHealthController : MonoBehaviour
     public int maxHealth;
 
     public float damageInvincLength = 1f;
-    private float invictCount;
+    private float invincCount;
 
     private void Awake()
     {
@@ -28,11 +28,11 @@ public class PlayerHealthController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(invictCount > 0)
+        if(invincCount > 0)
         {
-            invictCount -= Time.deltaTime;
+            invincCount -= Time.deltaTime;
 
-            if(invictCount <= 0)
+            if(invincCount <= 0)
             {
                 PlayerController.instance.bodySR.color = new Color(PlayerController.instance.bodySR.color.r, PlayerController.instance.bodySR.color.g, PlayerController.instance.bodySR.color.b, 1f);
             }
@@ -41,11 +41,11 @@ public class PlayerHealthController : MonoBehaviour
 
     public void DamagePlayer()
     {
-        if(invictCount <= 0)
+        if(invincCount <= 0)
         {
            currentHealth--;
 
-            invictCount = damageInvincLength;
+            invincCount = damageInvincLength;
 
             PlayerController.instance.bodySR.color = new Color(PlayerController.instance.bodySR.color.r, PlayerController.instance.bodySR.color.g, PlayerController.instance.bodySR.color.b, .5f);
         
@@ -63,5 +63,12 @@ public class PlayerHealthController : MonoBehaviour
            UIController.instance.healthSlider.value = currentHealth;
            UIController.instance.healthText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
         }
+    }
+
+    public void MakeInvincible(float length)
+    {
+        invincCount = length;
+        PlayerController.instance.bodySR.color = new Color(PlayerController.instance.bodySR.color.r, PlayerController.instance.bodySR.color.g, PlayerController.instance.bodySR.color.b, .5f);
+
     }
 }
