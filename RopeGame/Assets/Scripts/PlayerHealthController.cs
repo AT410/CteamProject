@@ -53,10 +53,10 @@ public class PlayerHealthController : MonoBehaviour
            {
                PlayerController.instance.gameObject.SetActive(false);
 
-                ChageScene.instance.SceneName = "GameOverScene";
+                GameManager.GetGameManager().GetComponent<ChageScene>().SceneName = "GameOverScene";
                 Color DeathFadeC = new Color(201.0f/255.0f,51.0f/255.0f,41.0f/255.0f);
-                ChageScene.instance.SetFadeColor(DeathFadeC);
-                ChageScene.instance.PushStart();
+                GameManager.GetGameManager().GetComponent<ChageScene>().SetFadeColor(DeathFadeC);
+                GameManager.GetGameManager().GetComponent<ChageScene>().PushStart();
                //UIController.instance.deathScreen.SetActive(true);
            }
 

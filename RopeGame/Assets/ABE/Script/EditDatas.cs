@@ -24,8 +24,10 @@ public class EditDatas : EditorWindow
     /// <summary>
     /// Editor用メンバ変数
     /// </summary>
-   
-    public ObjectType _type =ObjectType.Enemy;
+
+    public ObjectType _type = ObjectType.Enemy;
+
+    public EnemyType _Etype = EnemyType.Zomib;
 
     //
     private ObjectData _result;
@@ -63,6 +65,14 @@ public class EditDatas : EditorWindow
             using (new GUILayout.HorizontalScope(EditorStyles.toolbar))
             {
                 GUI.backgroundColor = Color.magenta;
+                GUILayout.Label("Type");
+                GUI.backgroundColor = defaultColor;
+                _Etype = (EnemyType)EditorGUILayout.EnumPopup(_Etype);
+            }
+            GUI.backgroundColor = defaultColor;
+            using (new GUILayout.HorizontalScope(EditorStyles.toolbar))
+            {
+                GUI.backgroundColor = Color.magenta;
                 GUILayout.Label("IsLimit");
                 GUI.backgroundColor = defaultColor;
                 _result.GetDelFlag = EditorGUILayout.Toggle(_result.GetDelFlag);
@@ -85,6 +95,7 @@ public class EditDatas : EditorWindow
             if (GUILayout.Button("作成"))
             {
                 _result.type = _type;
+                _result.Etype = _Etype;
                 Export();
                 EditorUtility.DisplayDialog("", "", "OK");
             }

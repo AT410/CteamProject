@@ -10,7 +10,7 @@ public class SpoilController : EnemyBase
     //  private string state;
     void Update()
     {
-        Debug.Log(state);
+        //Debug.Log(state);
         if (state != "Caught")
         {
             if (state == "Sleep")
@@ -54,7 +54,6 @@ public class SpoilController : EnemyBase
         {
             state = "RandamMove";
         }
-
 
     }
     /// <summary>

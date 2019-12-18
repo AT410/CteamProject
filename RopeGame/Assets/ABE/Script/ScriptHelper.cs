@@ -22,6 +22,21 @@ public class StateMachine<T>
     //一つ前のステート
     private ObjState<T> m_PreviousState;
 
+    //更新可能
+    private bool _IsActive = true;
+
+    public bool IsUpdateActive
+    {
+        get
+        {
+            return _IsActive;
+        }
+        set
+        {
+            _IsActive = value;
+        }
+    }
+
     //コンストラクタ
     public StateMachine(T Obj)
     {
@@ -32,6 +47,11 @@ public class StateMachine<T>
 
     public void Update()
     {
+        if(!_IsActive)
+        {
+            return;
+        }
+
         if (m_CurrentState!=null && m_Owner !=null)
         {
             m_CurrentState.Execute(ref m_Owner);
@@ -53,5 +73,10 @@ public class StateMachine<T>
             m_CurrentState.Enter(ref m_Owner);
         }
 
+    }
+
+    public bool ChackState(ObjState<T> other)
+    {
+        return other == m_CurrentState;
     }
 }
