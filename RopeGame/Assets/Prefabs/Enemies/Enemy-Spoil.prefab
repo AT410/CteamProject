@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4267784000843216073}
   - component: {fileID: 2616011149216839407}
   m_Layer: 10
-  m_Name: Enemy-Skeleton
+  m_Name: Enemy-Spoil
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

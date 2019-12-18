@@ -73,6 +73,9 @@ public class EnemyBase : MonoBehaviour
         m_destinationX = Random.Range(-MOVEMENT_RANGE + transform.position.x, MOVEMENT_RANGE + transform.position.x);
         m_destinationY = Random.Range(-MOVEMENT_RANGE + transform.position.y, MOVEMENT_RANGE + transform.position.y);
     }
+    /// <summary>
+    /// ランダム移動するときの移動方向を求める
+    /// </summary>
     protected void　RandamMove()
     {
         if ((int)m_destinationY == (int)transform.position.y&&(int)m_destinationX == (int)transform.position.x)

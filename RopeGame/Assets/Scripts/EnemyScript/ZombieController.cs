@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Spoli行動ルーチン
+  *製作者　篠﨑*/
 public class ZombieController : EnemyBase
 {
     private float m_currentTime = 0;
     private float m_stopTime = 1f;
-    [SerializeField]
-    private EnemyProximity enemyProximity;
     // Update is called once per frame
     //  private string state;
     void Update()
@@ -35,7 +35,11 @@ public class ZombieController : EnemyBase
         DistancePlayer();
         //追跡関数
         PlayerChase();
-      //  enemyProximity.Shot();
+
+        if (m_distance < playerDistance + 1)
+        {
+            state = "Sleep";
+        }
         if (m_distance < playerDistance && m_distance < MAXDISTANCE)
         {
             state = "Away";
@@ -45,7 +49,7 @@ public class ZombieController : EnemyBase
         {
             state = "Approach";
         }
-        else
+        else if (m_distance > MAXDISTANCE)
         {
             state = "RandamMove";
         }
@@ -60,17 +64,16 @@ public class ZombieController : EnemyBase
         switch (state)
         {
             case ("Approch"):
-             //   enemyProximity.Shot();
+
                 break;
             case ("Away"):
                 m_moveX *= -1;
                 m_moveY *= -1;
-            //    enemyProximity.Shot();
+
                 break;
             case ("Sleep"):
                 m_moveX = 0;
                 m_moveY = 0;
-              //  enemyProximity.Shot();
                 break;
             case ("RandamMove"):
                 RandamMove();
