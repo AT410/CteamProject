@@ -611,6 +611,7 @@ MonoBehaviour:
   Buttons:
   - {fileID: 134760735}
   - {fileID: 935404341}
+  SelectNum: 0
 --- !u!114 &482943375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,9 +624,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a2336785f8be1418400f546cb9a4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Datas: []
+  EnemyPrefabs: []
   Test: {fileID: 0}
+  pauseUI: {fileID: 0}
   MaxNumObjects: 0
+  _GenerateTime: 0
+  QuestEnemyNum: 11
 --- !u!1 &770421496
 GameObject:
   m_ObjectHideFlags: 0

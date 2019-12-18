@@ -3,6 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+public struct CompletValue
+{
+    public int T1;
+    public int T2;
+    public int T3;
+
+    public CompletValue(int AllVal)
+    {
+        int Del1, Del2, Del3;
+        int temp = AllVal;
+        do
+        {
+            AllVal = temp;
+            Del1 = Random.Range(2, AllVal - 4);
+            AllVal -= Del1;
+            Del2 = Random.Range(2, AllVal - 4);
+            AllVal -= Del2;
+            Del3 = Random.Range(2, AllVal - 4);
+            AllVal -= Del3;
+
+        } while (AllVal>0 && Del1 <= 2 && Del2 <= 2 && Del3 <= 2);
+
+        T1 = Del1;
+        T2 = Del2;
+        T3 = Del3;
+    }
+
+    public float Chack100P()
+    {
+        var P = T1 + T2 + T3;
+        return P / 100.0f;
+    }
+}
+
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager Ins;
@@ -22,13 +58,31 @@ public class GameManager : MonoBehaviour
     /// オブジェクトデータ
     /// </summary>
     [SerializeField]
-    private List<ObjectData> Datas = new List<ObjectData>();
+    private List<GameObject> EnemyPrefabs = new List<GameObject>();
 
     public GameObject Test;
 
     private Queue<GameObject> Objects;
 
     public GameObject pauseUI;
+
+    /// <summary>
+    /// 同時に生成されるオブジェクト上限数
+    /// </summary>
+    [SerializeField]
+    [Range(1, 50)]
+    private int MaxNumObjects;
+
+
+    [SerializeField]
+    [Range(1,5)]
+    private float _GenerateTime;
+
+    [SerializeField]
+    [Range(1, 50)]
+    private int QuestEnemyNum;
+
+    private CompletValue MM;
 
     //ステートマシン
     StateMachine<GameManager> state;
@@ -38,19 +92,13 @@ public class GameManager : MonoBehaviour
         return state;
     }
 
-    /// <summary>
-    /// 同時に生成されるオブジェクト上限数
-    /// </summary>
-    [SerializeField]
-    [Range(1,50)]
-    private int MaxNumObjects;
-
     // Start is called before the first frame update
     void Start()
     {
         state = new StateMachine<GameManager>(this);
         Objects = new Queue<GameObject>();
         state.ChangeState(ExecuteSceneState.Instance());
+        MM = new CompletValue(0);
         SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
     }
 
@@ -60,6 +108,11 @@ public class GameManager : MonoBehaviour
         {
             state.IsUpdateActive = false;
             return;
+        }
+        else
+        {
+            //クエスト生成
+            CreateQuest();
         }
 
         state.IsUpdateActive = true;
@@ -88,12 +141,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void CreateQuest()
+    {
+        MM = new CompletValue(QuestEnemyNum);
+        Debug.Log("T1=" + MM.T1.ToString() + "T2=" + MM.T2.ToString() + "T3=" + MM.T3.ToString());
+    }
+
     //生成関数
     public IEnumerator CreateObject()
     {
         while(Objects.Count != MaxNumObjects)
         {
-            var s = GameObject.Instantiate(Test);
+            int SelectNum  = Random.Range(0,EnemyPrefabs.Count);
+            var Pre = EnemyPrefabs[SelectNum];
+            Vector3 Pos = new Vector3(Random.Range(-4, 4), Random.Range(-4, 4));
+            var s = GameObject.Instantiate(Pre, Pos,Quaternion.identity);
             Objects.Enqueue(s);
             yield return new WaitForSeconds(1.0f);
         }
