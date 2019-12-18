@@ -1,9 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager Ins;
+
+    public static GameManager GetGameManager()
+    {
+        return Ins;
+    }
+
+    private void Awake()
+    {
+        Ins = this;
+    }
+
+
     /// <summary>
     /// オブジェクトデータ
     /// </summary>
@@ -14,8 +28,15 @@ public class GameManager : MonoBehaviour
 
     private Queue<GameObject> Objects;
 
+    public GameObject pauseUI;
+
     //ステートマシン
     StateMachine<GameManager> state;
+
+    public StateMachine<GameManager> GetStateMachine()
+    {
+        return state;
+    }
 
     /// <summary>
     /// 同時に生成されるオブジェクト上限数
@@ -29,7 +50,20 @@ public class GameManager : MonoBehaviour
     {
         state = new StateMachine<GameManager>(this);
         Objects = new Queue<GameObject>();
-        state.ChangeState(TestState.Instance());
+        state.ChangeState(ExecuteSceneState.Instance());
+        SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
+    }
+
+    private void SceneManager_activeSceneChanged(Scene Currnt, Scene Next)
+    {
+        if (Next.name != "MainGameScene")
+        {
+            state.IsUpdateActive = false;
+            return;
+        }
+
+        state.IsUpdateActive = true;
+        return;
     }
 
     // Update is called once per frame
@@ -37,12 +71,9 @@ public class GameManager : MonoBehaviour
     {
         //StartCoroutine(CreateObject());
         state.Update();
-        if(Input.GetKeyDown(KeyCode.Return))
-        {
-            state.ChangeState(TestState2.Instance());
-        }
+
         //ChackNumObj();
-        SleepObj();
+        //SleepObj();
     }
 
     /// <summary>
@@ -92,16 +123,21 @@ public class GameManager : MonoBehaviour
 /// <summary>
 /// ステート実体
 /// </summary>
-public class TestState : ObjState<GameManager>
-{
-    private static TestState _instance = new TestState();
 
-    public static TestState Instance()
+
+///<summary>
+///実行中ステート
+/// </summary>
+public class ExecuteSceneState : ObjState<GameManager>
+{
+    private static ExecuteSceneState _instance = new ExecuteSceneState();
+
+    public static ExecuteSceneState Instance()
     {
         return _instance;
     }
 
-    private TestState() { }
+    private ExecuteSceneState() { }
 
     public override void Enter(ref GameManager other)
     {
@@ -110,38 +146,49 @@ public class TestState : ObjState<GameManager>
 
     public override void Execute(ref GameManager other)
     {
-
+        if (Input.GetKeyDown("joystick button 9")||Input.GetKeyDown(KeyCode.E))
+        {
+            other.GetStateMachine().ChangeState(PauseSceneState.Instance());
+        }
     }
 
     public override void Exit(ref GameManager other)
     {
-        Debug.Log("ExitState1");
+        //
+        other.pauseUI.SetActive(true);
+        //すべての更新を止める
+        Time.timeScale = 0;
     }
 }
 
-public class TestState2 : ObjState<GameManager>
+public class PauseSceneState : ObjState<GameManager>
 {
-    private static TestState2 _instance = new TestState2();
+    private static PauseSceneState _instance = new PauseSceneState();
 
-    public static TestState2 Instance()
+    public static PauseSceneState Instance()
     {
         return _instance;
     }
 
-    private TestState2() { }
+    private PauseSceneState() { }
 
     public override void Enter(ref GameManager other)
     {
-        Debug.Log("EnterState2");
+
     }
 
     public override void Execute(ref GameManager other)
     {
-       // Debug.Log("ExcuteState2");
+        if (Input.GetKeyDown("joystick button 9") || Input.GetKeyDown(KeyCode.E))
+        {
+            other.GetStateMachine().ChangeState(ExecuteSceneState.Instance());
+        }
     }
 
     public override void Exit(ref GameManager other)
     {
-        Debug.Log("ExitState2");
+        other.pauseUI.SetActive(false);
+        //更新を再開
+        Time.timeScale = 1.0f;
     }
 }

@@ -14,6 +14,9 @@ public class SpoilController : EnemyBase
     //  private string state;
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+            return;
+
         if (state == "Sleep")
         {
             m_currentTime += Time.deltaTime;
@@ -57,7 +60,7 @@ public class SpoilController : EnemyBase
         {
             state = "RandamMove";
         }
-        Debug.Log(state);
+        //Debug.Log(state);
         StateCheck();
 
     }
