@@ -14,6 +14,10 @@ public class SpoilController : EnemyBase
     //  private string state;
     void Update()
     {
+        if (m_distance < MAXDISTANCE)
+        {
+            enemyShot.Shot();
+        }
         if (state == "Sleep")
         {
             m_currentTime += Time.deltaTime;
@@ -41,12 +45,10 @@ public class SpoilController : EnemyBase
         if (m_distance < playerDistance+1 )
         {
             state = "Sleep";
-            enemyShot.Shot();
         }
         if (m_distance < playerDistance && m_distance < MAXDISTANCE)
         {
-            state = "Away";
-            enemyShot.Shot();
+            state = "Away";      
 
         }
         else if (m_distance > playerDistance && m_distance < MAXDISTANCE)
