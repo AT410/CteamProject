@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*敵AI弾発射script
-  *製作者　篠﨑*/
-public class EnemyShot : MonoBehaviour
+public class EnemyProximity : MonoBehaviour
 {
     private GameObject m_player;//プレイヤーのgameobjectを格納
-    private float m_shotTime = 1;//弾の発射速度
-    private float m_speed = 5;//弾の速度
+    private float m_shotTime = 0.01f;//弾の発射速度
+    private float m_speed = 10f;//弾の速度
     private float m_currentTime = 0;//弾の発射カウント
     private ObjectPool m_pool;//ObjectPoolを格納
     const string PLAYERNAME = "Player";//ヒエルラキー上のプレイヤーの名前
@@ -25,6 +23,7 @@ public class EnemyShot : MonoBehaviour
     {
         //指定時間経つごとに弾を発射する
         m_currentTime += Time.deltaTime;
+
         if (m_shotTime < m_currentTime)
         {
             m_currentTime = 0;
