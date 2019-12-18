@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    /// <summary>
-    /// オブジェクトデータ
-    /// </summary>
-    [SerializeField]
-    private List<ObjectData> Datas = new List<ObjectData>();
 
     public GameObject Test;
 

@@ -24,14 +24,12 @@ public class ZombieController : EnemyBase
                 if (m_stopTime < m_currentTime)
                 {
                     m_currentTime = 0;
-                    state = "Randam";
+                    state = "RandamMove";
                 }
             }
             else
             {
-
                 ActionPolicy();
-
             }
         }
         StateCheck();
@@ -63,8 +61,6 @@ public class ZombieController : EnemyBase
         {
             state = "RandamMove";
         }
-       
-
     }
     /// <summary>
     /// 状態チェック

@@ -6,6 +6,8 @@ public class SpoilController : EnemyBase
 {
     private float m_currentTime = 0;
     private float m_stopTime = 1f;
+    public Animator anim;
+   // public Animator Anim { get { return this._anim ? this._anim : this._anim = GetComponent<Animator>(); } }
     // Update is called once per frame
     //  private string state;
     void Update()
@@ -30,6 +32,8 @@ public class SpoilController : EnemyBase
             }
         }
         StateCheck();
+
+      
     }
     /// <summary>
     /// 行動方針を決定する
@@ -84,4 +88,5 @@ public class SpoilController : EnemyBase
         }
         transform.Translate(m_moveX, m_moveY, 0, Space.World);
     }
+
 }
