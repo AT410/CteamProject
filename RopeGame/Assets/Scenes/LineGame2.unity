@@ -1105,6 +1105,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1120,6 +1121,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad7d5e376505bd4499bb1ed58f16f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1140383786}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -2052,12 +2066,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1140383790}
-  - component: {fileID: 1140383787}
   - component: {fileID: 1140383789}
   - component: {fileID: 1140383788}
   - component: {fileID: 1140383791}
   - component: {fileID: 1140383792}
   - component: {fileID: 1140383793}
+  - component: {fileID: 1140383787}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -2074,24 +2088,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1140383786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 067cf8676f7367b4fb266f99389da16a, type: 3}
+  m_Script: {fileID: 11500000, guid: ac92009969ee256449d738e10f22b1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  theRB: {fileID: 1140383788}
-  gunArm: {fileID: 1954727058}
-  playerTrans: {fileID: 1140383790}
-  anim: {fileID: 1140383791}
-  bulletToFire: {fileID: 1055231132126804063, guid: 21568dd3970ccd849a70057a2a1d8d26,
-    type: 3}
-  firePoint: {fileID: 270921832}
-  TimeBetweenShots: 0.2
-  bodySR: {fileID: 106305017}
-  dashSpeed: 8
-  dashLength: 0.5
-  dashCooldown: 1
-  dashInvincibility: 0.5
-  attackTime: 0.3
 --- !u!50 &1140383788
 Rigidbody2D:
   serializedVersion: 4
@@ -3425,9 +3424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6857e6686cbcaf47ae950c4cb5040af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 5
-  damageInvincLength: 1
+  hpBrandy: []
 --- !u!1 &2011976972
 GameObject:
   m_ObjectHideFlags: 0
@@ -3832,6 +3829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9e1dd1aefbf7e4880913591870056f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1140383786}
 --- !u!212 &2096538555
 SpriteRenderer:
   m_ObjectHideFlags: 0
