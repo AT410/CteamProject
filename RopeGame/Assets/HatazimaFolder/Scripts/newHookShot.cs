@@ -68,14 +68,15 @@ public class newHookShot : MonoBehaviour
         Debug.DrawRay(transform.position, vec * 10, Color.red, 3);
         if (hit.collider != null)
         {
-            if (hit.collider.gameObject != gameObject)
+           
+            if (hit.collider.gameObject != gameObject&&!hit.collider.gameObject.CompareTag("Bullet"))
             {
-                //if (targ != null && targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().SleepState();
+                if (targ != null && targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().SleepState();
                 targ = hit.collider.gameObject;
                 dist = Vector3.Distance(transform.position, targ.transform.position); //現在位置と選択したオブジェクトまでの距離を測る
                 move = true;
                 rope.SetActive(true);
-                //if(targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().EscapeState();
+                if(targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().EscapeState();
                 //線の座標指定
                 line.SetPosition(0, transform.position);
                 line.SetPosition(1, targ.transform.position);
@@ -107,7 +108,7 @@ public class newHookShot : MonoBehaviour
         {
             rope.SetActive(false);
             move = false;
-            //targ.GetComponent<EnemyBase>().SleepState();
+            targ.GetComponent<EnemyBase>().SleepState();
         }
 
         if (0 >= nowDist - 1.5) //オブジェクトまでの距離に対応した時間だけ移動したら止まる
@@ -116,7 +117,7 @@ public class newHookShot : MonoBehaviour
             move = false;
             if (targ.CompareTag("Enemy"))
             {
-                //targ.GetComponent<EnemyBase>().SleepState();
+                targ.GetComponent<EnemyBase>().SleepState();
                 targ.SetActive(false); //仮置き
             }
         }

@@ -24,14 +24,12 @@ public class ZombieController : EnemyBase
                 if (m_stopTime < m_currentTime)
                 {
                     m_currentTime = 0;
-                    state = "Randam";
+                    state = "RandamMove";
                 }
             }
             else
             {
-
                 ActionPolicy();
-
             }
         }
         StateCheck();
@@ -63,8 +61,6 @@ public class ZombieController : EnemyBase
         {
             state = "RandamMove";
         }
-       
-
     }
     /// <summary>
     /// 状態チェック
@@ -99,7 +95,7 @@ public class ZombieController : EnemyBase
   
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player"&&state !="caught")
+        if (collision.gameObject.name == "Player"&& state !="Caught")
         {
             m_currentTime2 += Time.deltaTime;
             if (m_shotTime < m_currentTime2)

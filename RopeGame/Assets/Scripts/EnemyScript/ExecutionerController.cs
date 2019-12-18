@@ -31,9 +31,7 @@ public class ExecutionerController : EnemyBase
             }
             else
             {
-
                 ActionPolicy();
-
             }
         }
         StateCheck();
