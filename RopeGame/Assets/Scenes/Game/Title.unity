@@ -592,7 +592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fadeTime: 2
   fade: {fileID: 482943370}
-  _SceneName: Duarte
+  _SceneName: MainGameScene
   Test: 0
   _cangetype: 0
   _fadetype: 0
