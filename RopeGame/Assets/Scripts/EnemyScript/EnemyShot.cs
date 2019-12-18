@@ -24,14 +24,14 @@ public class EnemyShot : MonoBehaviour
     public void Shot()
     {
         //指定時間経つごとに弾を発射する
-        m_currentTime += Time.deltaTime;
-        if (m_shotTime < m_currentTime)
-        {
+       // m_currentTime += Time.deltaTime;
+      //  if (m_shotTime < m_currentTime)
+     //   {
             m_currentTime = 0;
             var bullet = PositionSetting();
             //弾に速度をつけて発射
             bullet.GetComponent<Rigidbody2D>().velocity = (m_player.transform.position - bullet.transform.position).normalized * m_speed;
-        }
+     //   }
     }
     /// <summary>
     /// 初期位置設定関数及び弾のアクティブ化（生成）

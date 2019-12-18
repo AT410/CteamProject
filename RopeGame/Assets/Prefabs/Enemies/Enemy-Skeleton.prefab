@@ -89,8 +89,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2616011149216839406}
   - component: {fileID: 2616011149216839377}
-  - component: {fileID: 2616011149216839376}
+  - component: {fileID: 4583519808060685411}
   - component: {fileID: 2616011149216839379}
+  - component: {fileID: 4267784000843216073}
   - component: {fileID: 2616011149216839407}
   m_Layer: 10
   m_Name: Enemy-Skeleton
@@ -141,7 +142,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.51086974, y: 0.89864755}
   m_EdgeRadius: 0
---- !u!114 &2616011149216839376
+--- !u!114 &4583519808060685411
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,27 +151,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2616011149216839378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0549ae7e3588497488e50beaade9239f, type: 3}
+  m_Script: {fileID: 11500000, guid: c77cc3b210e3c4346a23a7da88988251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theRb: {fileID: 2616011149216839379}
-  moveSpeed: 3
-  rangetoChasePlayer: 7
-  anim: {fileID: 2616011149216839407}
-  health: 150
-  deathSplatters:
-  - {fileID: 8827878384863478068, guid: d724c4ba569167149b383a224a9a1c2d, type: 3}
-  - {fileID: 6794377209067285758, guid: 0b43c5ddb663a0747a5dd4cc3d74228d, type: 3}
-  - {fileID: 2409620065908916887, guid: 5c4a5692d652a3049a94e1de86951bec, type: 3}
-  - {fileID: 4254424412507679336, guid: 71e3115ad71e5cc4186dd264cd7a36bb, type: 3}
-  hitEffect: {fileID: 5427838211040302471, guid: e9be58f845aa89a42b7ecf6e866fd3b5,
-    type: 3}
-  shouldShoot: 1
-  bullet: {fileID: 3474096105264816196, guid: ca89a46586a353c4499fac0d86b5fd88, type: 3}
-  firePoint: {fileID: 230810104630026297}
-  fireRate: 1
-  shootRange: 10
-  theBody: {fileID: 2616011148549554080}
+  m_speed: 0.05
+  playerDistance: 8
+  enemyShot: {fileID: 4267784000843216073}
 --- !u!50 &2616011149216839379
 Rigidbody2D:
   serializedVersion: 4
@@ -192,6 +178,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4267784000843216073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2616011149216839378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece9d8d87b8c1ec4bb59abb5106379c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &2616011149216839407
 Animator:
   serializedVersion: 3
