@@ -16,12 +16,12 @@ public class EnemyBase : MonoBehaviour
     protected int m_tmp;//sqrtを使う前に入れる
     protected double m_distance;//プレイヤーとの距離を代入
     protected GameObject m_player;//プレイヤー格納変数
-    protected string state = "Randam";
+    protected string state = "RandamMove";
     const string PLAYER_NAME = "Player";//ヒエルラキー上のプレイヤー名
     const string PLAYER_SHOT = "Player_Shot";
     [SerializeField]
     protected float playerDistance = 8.0f;//プレイヤーとの開ける距離
-    protected const float MAXDISTANCE = 15.0f;//最大検知範囲
+    protected const float MAXDISTANCE = 10.0f;//最大検知範囲
     protected const float MOVEMENT_RANGE = 2f;//最大目的地移動範囲
    
 
@@ -87,6 +87,14 @@ public class EnemyBase : MonoBehaviour
         m_moveX = m_speed * Mathf.Cos(m_rad);
         m_moveY = m_speed * Mathf.Sin(m_rad);
     }
+    public void EscapeState()
+    {
+        state = "Caught";
+    }
 
+    public void SleepState()
+    {
+        state = "Sleep";
+    }
 
 }

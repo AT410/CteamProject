@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StarMove : MonoBehaviour
 {
-    float speed = 0.05f; // 移動の速さ
+    float speed = 0.1f; // 移動の速さ
     // Update is called once per frame
     void Update()
     {
