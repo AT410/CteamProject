@@ -37,23 +37,27 @@ public class SpoilController : EnemyBase
         DistancePlayer();
         //追跡関数
         PlayerChase();
-        if (Mathf.Round((float)m_distance) == playerDistance || Mathf.Round((float)m_distance) == playerDistance + 1)
+      
+        if (m_distance < playerDistance+1 )
         {
-            state = "sleep";
+            state = "Sleep";
+            enemyShot.Shot();
         }
-        else if (m_distance < playerDistance && m_distance < MAXDISTANCE)
+        if (m_distance < playerDistance && m_distance < MAXDISTANCE)
         {
             state = "Away";
+            enemyShot.Shot();
 
         }
         else if (m_distance > playerDistance && m_distance < MAXDISTANCE)
         {
             state = "Approach";
         }
-        else
+        else if (m_distance > MAXDISTANCE)
         {
             state = "RandamMove";
         }
+        Debug.Log(state);
         StateCheck();
 
     }
@@ -65,12 +69,12 @@ public class SpoilController : EnemyBase
         switch (state)
         {
             case ("Approch"):
-                enemyShot.Shot();
+               
                 break;
             case ("Away"):
                 m_moveX *= -1;
                 m_moveY *= -1;
-                enemyShot.Shot();
+               
                 break;
             case ("Sleep"):
                 m_moveX = 0;
