@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
     private bool attacking = false;
     private float attackTimeCounter;
 
+    Vector2 spawnpoint = Vector2.zero;
+
     private void Awake()
     {
         instance = this;
@@ -126,6 +128,10 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    public void getSpawnpoint(Vector2 point) { spawnpoint = point; }
+
+    public void respawn() { transform.position = spawnpoint; }
 }
 
         /*
