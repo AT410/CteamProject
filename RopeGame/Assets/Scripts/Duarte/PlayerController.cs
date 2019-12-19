@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     //Spawn variables
     Vector2 spawnpoint = Vector2.zero;
 
-    public bool isattacking;
+    public bool isattacking = false;
 
     //Effects
     private string DodgeEffect = "DodgeEffect";

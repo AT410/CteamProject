@@ -3084,6 +3084,7 @@ MonoBehaviour:
   dashInvincibility: 0.5
   dashCounter: 0
   attackTime: 0.3
+  isattacking: 0
 --- !u!50 &1140383788
 Rigidbody2D:
   serializedVersion: 4
@@ -3129,7 +3130,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140383786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: -3.64, z: -2}
+  m_LocalPosition: {x: -2.73, y: -1.22, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 1173187262}
@@ -5014,7 +5015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1973793541
 Transform:
   m_ObjectHideFlags: 0
@@ -5086,6 +5087,7 @@ MonoBehaviour:
   - {fileID: 1543759049}
   currentHealth: 5
   maxHealth: 5
+  BloodEffect: BloodEffect
 --- !u!1 &2058453512
 GameObject:
   m_ObjectHideFlags: 0
@@ -5515,7 +5517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2096538553}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6, y: -0.55, z: 0}
+  m_LocalPosition: {x: -0.93, y: -0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

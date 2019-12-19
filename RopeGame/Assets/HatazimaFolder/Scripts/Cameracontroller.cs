@@ -5,10 +5,37 @@ using UnityEngine;
 public class Cameracontroller : MonoBehaviour
 {
     public GameObject player;
-    
+    int move = 0;
+
     void LateUpdate()
     {
-        Vector3 playerPos = player.transform.position;
-        transform.position = new Vector3(playerPos.x, playerPos.y, transform.position.z);
+        move = 0;
+
+        if(player.transform.position.y > 7 || player.transform.position.y < -7)
+        {
+            move++;
+        }
+
+        if(player.transform.position.x > 7 || player.transform.position.x < -7)
+        {
+            move += 2;
+        }
+
+        if(move == 0)
+        {
+            Vector3 playerPos = player.transform.position;
+            transform.position = new Vector3(playerPos.x, playerPos.y, transform.position.z);
+        }
+        else if(move == 1)
+        {
+            Vector3 playerPos = player.transform.position;
+            transform.position = new Vector3(playerPos.x, transform.position.y, transform.position.z);
+        }
+        else if(move == 2)
+        {
+            Vector3 playerPos = player.transform.position;
+            transform.position = new Vector3(transform.position.x, playerPos.y, transform.position.z);
+        }
+
     }
 }
