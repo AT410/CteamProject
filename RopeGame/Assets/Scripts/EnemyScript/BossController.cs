@@ -6,6 +6,10 @@ public class BossController : EnemyBase
 {
     private int tiredCount = 0;
     private float SERIOUS_DISTANCE = 2.0f;
+
+    Animator anim;
+    private string EnemyDeathEffect = "EnemyDeathEffect";
+
     void Update()
     {
         Debug.Log(state);
@@ -16,6 +20,11 @@ public class BossController : EnemyBase
               //  enemyShot.Shot();
             }
             ActionPolicy();
+        }
+        if (state == "Die")
+        {
+            anim.Play("Boss_Tangled");
+            EffectManager.instance.playInPlace(transform.position, EnemyDeathEffect);
         }
         StateCheck();
 

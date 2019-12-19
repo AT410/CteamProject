@@ -9,6 +9,9 @@ public class ExecutionerController : EnemyBase
     [SerializeField]
     private EnemyShot enemyShot;    //弾を格納する変数
 
+    Animator anim;
+    private string EnemyDeathEffect = "EnemyDeathEffect";
+
     void Update()
     {
         if (state != "Caught")
@@ -31,8 +34,12 @@ public class ExecutionerController : EnemyBase
                 ActionPolicy();
             }
         }
+        if(state == "Die")
+        {
+          anim.Play("Executioner_Tangled");
+          EffectManager.instance.playInPlace(transform.position, EnemyDeathEffect);
+        }
         StateCheck();
-
     }
     /// <summary>
     /// 行動方針を決定する
