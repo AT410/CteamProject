@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerHealthController : MonoBehaviour
 {
     public GameObject[] hpBrandy;
+    int hp = 5;
 
     public static PlayerHealthController instance;
     private string PlayerDeathEffect = "PlayerDeathEffect";
-    public int currentHealth =5;
-    public int maxHealth;
+    public int currentHealth;
+    public int maxHealth = 5;
 
     float damageInvincLength = 1f;
     private float invincCount;
@@ -44,14 +45,15 @@ public class PlayerHealthController : MonoBehaviour
     {
         if (invincCount <= 0)
         {
-            currentHealth--;
+            currentHealth -= 1;
 
             invincCount = damageInvincLength;
             
             PlayerController.instance.bodySR.color = new Color(PlayerController.instance.bodySR.color.r, PlayerController.instance.bodySR.color.g, PlayerController.instance.bodySR.color.b, .5f);
 
+            hp--;
             AudioManager.Instance.PlaySE("Damage");  //ダメージSE再生
-            hpBrandy[currentHealth].SetActive(false);
+            hpBrandy[hp].SetActive(false);
 
             if (currentHealth <= 0)
             {
@@ -82,8 +84,10 @@ public class PlayerHealthController : MonoBehaviour
 
     public void HealPlayer(int healAmount)
     {
-        hpBrandy[currentHealth].SetActive(true);
+        hpBrandy[hp].SetActive(true);
         AudioManager.Instance.PlaySE("Drink");  //回復SE再生
+        hp++;
+        if (hp > 5) hp = 5;
 
         currentHealth += healAmount;
         if(currentHealth > maxHealth)

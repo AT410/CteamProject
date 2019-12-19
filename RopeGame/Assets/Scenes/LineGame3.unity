@@ -773,6 +773,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 312274897}
   m_CullTransparentMesh: 0
+--- !u!1 &325324041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 325324043}
+  - component: {fileID: 325324042}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &325324042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325324041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05281359fb3d3de4f9f7221193b8f955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_poolObj: {fileID: 3474096105264816196, guid: ca89a46586a353c4499fac0d86b5fd88,
+    type: 3}
+  m_createObj: 0
+--- !u!4 &325324043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325324041}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &383896837
 GameObject:
   m_ObjectHideFlags: 0
@@ -3027,16 +3073,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067cf8676f7367b4fb266f99389da16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
   theRB: {fileID: 1140383788}
-  gunArm: {fileID: 1954727058}
-  playerTrans: {fileID: 1140383790}
-  anim: {fileID: 1140383791}
-  bulletToFire: {fileID: 1055231132126804063, guid: 21568dd3970ccd849a70057a2a1d8d26,
-    type: 3}
-  firePoint: {fileID: 270921832}
-  TimeBetweenShots: 0.2
   bodySR: {fileID: 106305017}
+  anim: {fileID: 1140383791}
+  playerTrans: {fileID: 1140383790}
+  moveSpeed: 5
   dashSpeed: 8
   dashLength: 0.5
   dashCooldown: 1
@@ -5043,6 +5084,8 @@ MonoBehaviour:
   - {fileID: 1306760998}
   - {fileID: 1901648961}
   - {fileID: 1543759049}
+  currentHealth: 5
+  maxHealth: 5
 --- !u!1 &2058453512
 GameObject:
   m_ObjectHideFlags: 0

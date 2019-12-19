@@ -11,42 +11,45 @@ public class newHookShot : MonoBehaviour
     RaycastHit hit;           //レイが当たったオブジェクトの様々な情報を格納する変数
     float dist;               //プレイヤーとオブジェクトの距離を格納する変数
     float nowDist;            //プレイヤーとオブジェクトの距離を格納する変数
-    float hori, vert;         //コントローラーのHorizontal&Verticalを格納する変数
+    float hori, vert;         //コントローラーのx軸y軸を格納する変数
     float stickAngle = 0.65f; //コントローラースティックの傾き
     float rollPower = 20;     //巻き取る力
-    int rollSe = 0;
+    int rollSe = 0;           //巻き取る際のSEの鳴る頻度
     bool move = false;        //プレイヤーが移動しているか判断する変数
     bool horiVert = false;    //スティックの傾きが前回x軸y軸のどちらに傾いたかの変数
 
 
     void Start()
     {
-        AudioManager.Instance.PlayBGM("Main");  //タイトルBGM再生
-        line.positionCount = 2;                                                 //線の頂点数
-        line.startWidth = 0.1f;                                                 //線の太さ
-        line.endWidth = 0.1f;                                                   //〃
-        rope.SetActive(false);                                                  //ラインを使うまで隠しておく
+        AudioManager.Instance.PlayBGM("Main"); //タイトルBGM再生
+        line.positionCount = 2;                //線の頂点数
+        line.startWidth = 0.1f;                //線の太さ
+        line.endWidth = 0.1f;                  //〃
+        rope.SetActive(false);                 //ラインを使うまで隠しておく
     }
     
     void Update()
     {
-        hori = Input.GetAxis("Horizontal2");
-        vert = Input.GetAxis("Vertical2");
-        
         if(!move)
         {
+            //縄を投げる
             if (Input.GetKeyDown("joystick button 5")) ObjectDesignation();
             if (Input.GetMouseButtonDown(0)) ObjectDesignation();
         }
         if (move)
         {
-            //コントローラ用
+            //コントローラーのx軸y軸を取得
+            hori = Input.GetAxis("Horizontal2");
+            vert = Input.GetAxis("Vertical2");
+
+            //コントローラー用
             if (horiVert && (hori >= stickAngle || hori <= -stickAngle)) Roll();
             else if (!horiVert && (vert >= stickAngle || vert <= -stickAngle)) Roll();
             
             //パソコン用
             if (Input.mouseScrollDelta.y != 0) Roll();
 
+            //縄を切る
             if (Input.GetKeyDown("joystick button 1") || Input.GetMouseButtonDown(1)) RopeCut();
 
             //線の座標指定
@@ -88,7 +91,6 @@ public class newHookShot : MonoBehaviour
 
     void Roll()
     {
-        
         nowDist = Vector3.Distance(transform.position, targ.transform.position); //現在位置と選択したオブジェクトまでの距離を測る
 
         //指定したオブジェクトを引き寄せるor指定したオブジェクトまで移動する
@@ -99,7 +101,7 @@ public class newHookShot : MonoBehaviour
             default: transform.position = Vector3.MoveTowards(transform.position, targ.transform.position, rollPower * Time.deltaTime); break;
         }
 
-        if (10 <= nowDist) //敵に逃げられたら止まる
+        if (10 <= nowDist) //敵に逃げられたらロープを切る
         {
             AudioManager.Instance.PlaySE("RopeCut");  //ロープが切れるSE再生
             rope.SetActive(false);
