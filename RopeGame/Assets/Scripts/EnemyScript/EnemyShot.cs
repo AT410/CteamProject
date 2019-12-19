@@ -6,12 +6,14 @@ using UnityEngine;
   *製作者　篠﨑*/
 public class EnemyShot : MonoBehaviour
 {
-    private GameObject m_player;//プレイヤーのgameobjectを格納
-    private float m_shotTime = 1;//弾の発射速度
-    private float m_speed = 5;//弾の速度
-    private float m_currentTime = 0;//弾の発射カウント
-    private ObjectPool m_pool;//ObjectPoolを格納
-    const string PLAYERNAME = "Player";//ヒエルラキー上のプレイヤーの名前
+   
+    private float      m_shotTime    = 1;   //弾の発射速度
+    private float      m_speed       = 5;   //弾の速度
+    private float      m_currentTime = 0;   //弾の発射カウント
+    private ObjectPool m_pool;              //ObjectPoolを格納
+    private GameObject m_player;            //プレイヤーのgameobjectを格納
+
+    private const string PLAYERNAME = "Player";    //ヒエルラキー上のプレイヤーの名前
 
     private void Start()
     {

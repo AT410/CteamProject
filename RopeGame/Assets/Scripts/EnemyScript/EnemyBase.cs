@@ -7,9 +7,9 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour
 {
     [SerializeField]
-    protected float m_defalutSpeed = 0.05f;
+    protected float m_defalutSpeed = 0.05f; //デフォルトの移動速度
     [SerializeField]
-    protected float playerDistance = 8.0f;//プレイヤーとの開ける距離
+    protected float playerDistance = 8.0f;　//プレイヤーとの開ける距離
 
     protected int   m_tmp;                  //sqrtを使う前に入れる
     protected float m_rad;                  //ラジアン変数
@@ -17,13 +17,13 @@ public class EnemyBase : MonoBehaviour
     protected float m_moveY;                //移動方向代入変数y
     protected float m_destinationX;         //ランダム移動目的地x
     protected float m_destinationY;         //ランダム移動目的地y
-    protected float m_speed;                //移動速度
+    protected float m_speed;                //現在移動速度
     protected float m_currentTime = 0;  　　//state"Sleep"時間測定
     protected float m_stopTime    = 1.0f;   //state"Sleep"待機時間
 
-    protected double     m_distance;    //プレイヤーとの距離を代入
-    protected GameObject m_player;      //プレイヤー格納変数
-    protected string     state = "RandamMove";
+    protected double     m_distance = 777;           //プレイヤーとの距離を代入
+    protected GameObject m_player;                   //プレイヤー格納変数
+    protected string     state      ="RandamMove";   //敵の現在状態
 
     protected const float MAXDISTANCE    = 10.0f;         //最大検知範囲
     protected const float MOVEMENT_RANGE = 2f;            //最大目的地移動範囲

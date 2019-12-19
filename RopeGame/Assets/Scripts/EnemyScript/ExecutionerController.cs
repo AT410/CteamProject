@@ -43,7 +43,6 @@ public class ExecutionerController : EnemyBase
         DistancePlayer();
         //追跡関数
         PlayerChase();
-        Debug.Log(state);
         if (m_distance < playerDistance+1 )
         {
             state = "Sleep";

@@ -8,6 +8,7 @@ TagManager:
   - Item
   - Scenary
   - Bullet
+  - Wall
   layers:
   - Default
   - TransparentFX
