@@ -13,7 +13,8 @@ public class newHookShot : MonoBehaviour
     float nowDist;            //プレイヤーとオブジェクトの距離を格納する変数
     float hori, vert;         //コントローラーのHorizontal&Verticalを格納する変数
     float stickAngle = 0.65f; //コントローラースティックの傾き
-    float rollPower = 15;     //巻き取る力
+    float rollPower = 20;     //巻き取る力
+    int rollSe = 0;
     bool move = false;        //プレイヤーが移動しているか判断する変数
     bool horiVert = false;    //スティックの傾きが前回x軸y軸のどちらに傾いたかの変数
 
@@ -69,15 +70,15 @@ public class newHookShot : MonoBehaviour
         Debug.DrawRay(transform.position, vec * 10, Color.red, 3);
         if (hit.collider != null)
         {
-            if (hit.collider.gameObject != gameObject)
+            //GetComponent<Test1>().enabled = false;
+            if (targ != null && targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().SleepState();
+            targ = hit.collider.gameObject;
+            if (!targ.CompareTag("Bullet"))
             {
-                //GetComponent<Test1>().enabled = false;
-                if (targ != null && targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().SleepState();
-                targ = hit.collider.gameObject;
                 dist = Vector3.Distance(transform.position, targ.transform.position); //現在位置と選択したオブジェクトまでの距離を測る
                 move = true;
                 rope.SetActive(true);
-                if(targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().EscapeState();
+                if (targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().EscapeState();
                 //線の座標指定
                 line.SetPosition(0, transform.position);
                 line.SetPosition(1, targ.transform.position);
@@ -100,6 +101,7 @@ public class newHookShot : MonoBehaviour
 
         if (10 <= nowDist) //敵に逃げられたら止まる
         {
+            AudioManager.Instance.PlaySE("RopeCut");  //ロープが切れるSE再生
             rope.SetActive(false);
             move = false;
             if (targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().SleepState();
@@ -119,17 +121,20 @@ public class newHookShot : MonoBehaviour
             //GetComponent<Test1>().enabled = true;
         }
 
-        if (horiVert)
+        rollSe++;
+        if (rollSe == 4)
         {
-            horiVert = false;
-            AudioManager.Instance.PlaySE("Roll");  //巻き取るSE再生
+            AudioManager.Instance.PlaySE("Roll");  //4回に一回巻き取るSEを再生
+            rollSe = 0;
         }
+
+        if (horiVert) horiVert = false;
         else if (!horiVert) horiVert = true;
     }
 
     public void RopeCut()
     {
-        AudioManager.Instance.PlaySE("RopeCut");  //フックSE再生
+        AudioManager.Instance.PlaySE("RopeCut");  //ロープが切れるSE再生
         rope.SetActive(false);
         move = false;
         targ.GetComponent<EnemyBase>().SleepState();
