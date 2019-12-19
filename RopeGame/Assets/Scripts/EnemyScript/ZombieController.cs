@@ -11,7 +11,7 @@ public class ZombieController : EnemyBase
 
     void Update()
     {
-        if (state != "Caught")
+        if (state != "Caught" && state != "Die")
         {
             if (state == "Sleep")
             {

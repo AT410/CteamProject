@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        this.gameObject.GetComponent<Rigidbody2D>().angularVelocity = 30;
         m_deleteTime -= Time.deltaTime;
         if (m_deleteTime < 0)
         {

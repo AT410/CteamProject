@@ -101,6 +101,7 @@ public class EnemyBase : MonoBehaviour
     /// </summary>
     protected void StateCheck()
     {
+        Debug.Log(state);
         switch (state)
         {
             case ("Approch"):
@@ -125,6 +126,9 @@ public class EnemyBase : MonoBehaviour
                 m_moveX *= -1;
                 m_moveY *= -1;
                 break;
+            case ("Die"):
+                gameObject.SetActive(false);
+                break;
         }
         transform.Translate(m_moveX, m_moveY, 0, Space.World);
     }
@@ -140,6 +144,10 @@ public class EnemyBase : MonoBehaviour
     {
         state = "Sleep";
         m_speed = m_defalutSpeed;
+    }
+    public void DieState()
+    {
+        state = "Die";
     }
 
     /// <summary>

@@ -13,7 +13,7 @@ public class newHookShot : MonoBehaviour
     float nowDist;            //プレイヤーとオブジェクトの距離を格納する変数
     float hori, vert;         //コントローラーのHorizontal&Verticalを格納する変数
     float stickAngle = 0.65f; //コントローラースティックの傾き
-    float rollPower = 15;     //巻き取る力
+    float rollPower = 20;     //巻き取る力
     bool move = false;        //プレイヤーが移動しているか判断する変数
     bool horiVert = false;    //スティックの傾きが前回x軸y軸のどちらに傾いたかの変数
 
@@ -113,7 +113,7 @@ public class newHookShot : MonoBehaviour
             if (targ.CompareTag("Enemy"))
             {
                 targ.GetComponent<EnemyBase>().SleepState();
-                GameManager.GetGameManager().QUIUpdate(targ.GetComponent<EnemyBase>().GetEnemyType());
+               // GameManager.GetGameManager().QUIUpdate(targ.GetComponent<EnemyBase>().GetEnemyType());
                 targ.SetActive(false); //仮置き
             }
             //GetComponent<Test1>().enabled = true;

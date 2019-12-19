@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
             anim.SetFloat("lastMoveY", Input.GetAxisRaw("Vertical"));
         }
 
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButtonDown("Fire1")||(Input.GetKeyDown("joystick button 5")))
         {
             attackTimeCounter = attackTime;
             attacking = true;

@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class BossController : EnemyBase
 {
-    private int tiredCount = 0;
+    private int m_tiredCount = 0;
     private float SERIOUS_DISTANCE = 2.0f;
+    private float m_cutTime = 1.0f;
+    private float m_cutCount = 0;
+    [SerializeField]
+    private EnemyShot enemyShot;
+    private newHookShot newhookshot;
+    private void Start()
+    {
+        base.Start();
+        newhookshot = m_player.GetComponent<newHookShot>();
+    }
     void Update()
     {
         Debug.Log(state);
-        if (state != "Caught")
+        if (state != "Caught" && state != "Die")
         {
             if (m_distance < MAXDISTANCE)
             {
-              //  enemyShot.Shot();
+                enemyShot.Shot();
             }
             ActionPolicy();
         }
@@ -49,14 +59,20 @@ public class BossController : EnemyBase
     }
     public override void Resistance()
     {
-        if (m_distance < playerDistance - SERIOUS_DISTANCE*tiredCount)
+        if (m_distance < playerDistance - SERIOUS_DISTANCE*m_tiredCount)
         {
-            m_speed = 3.0f;
-            tiredCount += 1;
-            //newHookShot.RopeCut();
+            m_cutCount += Time.deltaTime;
+            if (m_cutTime < m_cutCount)
+            {
+                m_speed = 3.0f;
+                m_tiredCount += 1;
+                newhookshot.RopeCut();
+                m_cutCount = 0;
+            }
         }
         else
         {
+            m_cutCount = 0;
             m_speed = m_defalutSpeed;
         }
     }

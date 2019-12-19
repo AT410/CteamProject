@@ -640,6 +640,8 @@ MonoBehaviour:
   Test: 0
   _cangetype: 0
   _fadetype: 1
+  IsRunning: 0
+  EndExe: 0
 --- !u!114 &133301206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,10 +668,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a2336785f8be1418400f546cb9a4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Datas: []
-  Test: {fileID: 0}
+  EnemyPrefabs: []
   pauseUI: {fileID: 0}
   MaxNumObjects: 0
+  _GenerateTime: 0
+  QuestEnemyMaxNum: 0
 --- !u!114 &133301208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -682,9 +685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6857e6686cbcaf47ae950c4cb5040af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 5
-  damageInvincLength: 1
+  hpBrandy: []
 --- !u!224 &133301209
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1817,6 +1818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9e1dd1aefbf7e4880913591870056f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1650875740}
 --- !u!212 &880165099
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2294,7 +2296,7 @@ PrefabInstance:
     - target: {fileID: 5408702153222221807, guid: d0b32c0dc542e91449bcb412f090a43f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.19999981
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5408702153222221807, guid: d0b32c0dc542e91449bcb412f090a43f,
         type: 3}
@@ -2900,7 +2902,7 @@ PrefabInstance:
     - target: {fileID: 2616011149216839378, guid: bc2cfd1d981510a4ab0fd5b3195c4eec,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2616011149216839406, guid: bc2cfd1d981510a4ab0fd5b3195c4eec,
         type: 3}
@@ -3692,6 +3694,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy-Spoil (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5395499754810449722, guid: e34c42afa63e7874bbff1421bcc5349c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5395499754810449670, guid: e34c42afa63e7874bbff1421bcc5349c,
         type: 3}
