@@ -24,9 +24,10 @@ public class Breakables : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.tag == "Player")
+        if(other.gameObject.tag == "Player")
         {
             if(PlayerController.instance.dashCounter > 0)
             {

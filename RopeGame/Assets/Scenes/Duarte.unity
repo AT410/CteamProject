@@ -1164,32 +1164,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!61 &474429120
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 474429113}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8125, y: 1}
-    newSize: {x: 0.8125, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.8125, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &517666539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,6 +1622,11 @@ PrefabInstance:
       propertyPath: itemsToDrop.Array.data[1]
       value: 
       objectReference: {fileID: 8722846596804335405}
+    - target: {fileID: 6887455958907094714, guid: e695c98974b0f68458e00ac5578a6f9c,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e695c98974b0f68458e00ac5578a6f9c, type: 3}
 --- !u!1 &762818781
@@ -2478,6 +2457,7 @@ MonoBehaviour:
   dashInvincibility: 0.5
   dashCounter: 0
   attackTime: 0.3
+  dodge: 0
   isattacking: 0
 --- !u!50 &1140383788
 Rigidbody2D:
@@ -2697,6 +2677,11 @@ PrefabInstance:
       propertyPath: itemsToDrop.Array.data[1]
       value: 
       objectReference: {fileID: 8722846596804335405}
+    - target: {fileID: 6887455958907094714, guid: e695c98974b0f68458e00ac5578a6f9c,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e695c98974b0f68458e00ac5578a6f9c, type: 3}
 --- !u!1 &1173187261
@@ -3535,6 +3520,11 @@ PrefabInstance:
       propertyPath: itemsToDrop.Array.data[1]
       value: 
       objectReference: {fileID: 8722846596804335405}
+    - target: {fileID: 6887455958907094714, guid: e695c98974b0f68458e00ac5578a6f9c,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e695c98974b0f68458e00ac5578a6f9c, type: 3}
 --- !u!1 &1595453744
@@ -5337,6 +5327,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Offset.y
+      value: -0.024545908
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.y
+      value: 1.2236414
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Offset.x
+      value: 0.03001678
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: 1.0690081
+      objectReference: {fileID: 0}
     - target: {fileID: 8050134665583732187, guid: e695c98974b0f68458e00ac5578a6f9c,
         type: 3}
       propertyPath: m_Name
@@ -5407,33 +5417,13 @@ PrefabInstance:
       propertyPath: itemsToDrop.Array.data[1]
       value: 
       objectReference: {fileID: 8722846596804335405}
-    - target: {fileID: 1651025483954227086, guid: e695c98974b0f68458e00ac5578a6f9c,
+    - target: {fileID: 6887455958907094714, guid: e695c98974b0f68458e00ac5578a6f9c,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1651025483954227086, guid: e695c98974b0f68458e00ac5578a6f9c,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.024545908
-      objectReference: {fileID: 0}
-    - target: {fileID: 1651025483954227086, guid: e695c98974b0f68458e00ac5578a6f9c,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 1.2236414
-      objectReference: {fileID: 0}
-    - target: {fileID: 1651025483954227086, guid: e695c98974b0f68458e00ac5578a6f9c,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: 0.03001678
-      objectReference: {fileID: 0}
-    - target: {fileID: 1651025483954227086, guid: e695c98974b0f68458e00ac5578a6f9c,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1.0690081
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 1651025483954227086, guid: e695c98974b0f68458e00ac5578a6f9c, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: e695c98974b0f68458e00ac5578a6f9c, type: 3}
 --- !u!1 &8722846596804335405 stripped
 GameObject:
