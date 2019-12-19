@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77cc3b210e3c4346a23a7da88988251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_defalutSpeed: 0.07
+  m_defalutSpeed: 0.06
   playerDistance: 8
   _enemyType: 2
   enemyShot: {fileID: 6569757853617251811}

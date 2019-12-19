@@ -605,7 +605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fadeTime: 2
   fade: {fileID: 482943370}
-  _SceneName: MainGameScene
+  _SceneName: MainGame
   Test: 0
   _cangetype: 0
   _fadetype: 0

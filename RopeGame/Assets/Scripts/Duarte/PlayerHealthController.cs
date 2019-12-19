@@ -45,7 +45,7 @@ public class PlayerHealthController : MonoBehaviour
         if (invincCount <= 0)
         {
             currentHealth--;
-            EffectManager.instance.playInPlace(PlayerController.instance.playerTrans.position, BloodEffect);
+           // EffectManager.instance.playInPlace(PlayerController.instance.playerTrans.position, BloodEffect);
             invincCount = damageInvincLength;
             
             PlayerController.instance.bodySR.color = new Color(PlayerController.instance.bodySR.color.r, PlayerController.instance.bodySR.color.g, PlayerController.instance.bodySR.color.b, .5f);
