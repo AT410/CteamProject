@@ -204,6 +204,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 482943374}
+        m_MethodName: ShotSE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &134760738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,7 +297,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -382,7 +393,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -552,7 +563,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -598,6 +609,8 @@ MonoBehaviour:
   Test: 0
   _cangetype: 0
   _fadetype: 0
+  IsRunning: 0
+  EndExe: 0
 --- !u!114 &482943374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,53 +639,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a2336785f8be1418400f546cb9a4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Datas: []
-  Test: {fileID: 0}
+  EnemyPrefabs: []
   pauseUI: {fileID: 0}
   MaxNumObjects: 0
---- !u!1 &770421496
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 770421498}
-  - component: {fileID: 770421497}
-  m_Layer: 0
-  m_Name: TestAudio
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &770421497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 770421496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a782009d62555bf4d97c543616569a2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &770421498
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 770421496}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  _GenerateTime: 0
+  QuestEnemyMaxNum: 0
 --- !u!1 &935404341
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,7 +837,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quit
+  m_Text: Exit
 --- !u!222 &1027786472
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1164,6 +1135,8 @@ MonoBehaviour:
   Test: 1
   _cangetype: 0
   _fadetype: 1
+  IsRunning: 0
+  EndExe: 0
 --- !u!114 &1396190261
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -85,10 +85,12 @@ public class ChageScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(_fadetype==FadeType.FadeOut && IsRunning ==false)
+        AudioManager.Instance.PlayBGM("Title");  //タイトルBGM再生
+        if (_fadetype==FadeType.FadeOut && IsRunning ==false)
         {
             PushStart();
         }
+        //AudioManager.Instance.PlayBGM("Title");  //タイトルBGM再生
     }
 
     // Update is called once per frame
@@ -159,6 +161,7 @@ public class ChageScene : MonoBehaviour
             {
                 case FadeType.FadeIn:
                     fade.IsEnd = false;
+                    AudioManager.Instance.FadeOutBGM(); //BGMフェードアウト
                     LoadScene();
                     break;
                 case FadeType.FadeOut:
