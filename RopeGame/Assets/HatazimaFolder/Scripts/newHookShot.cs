@@ -126,7 +126,7 @@ public class newHookShot : MonoBehaviour
         else if (!horiVert) horiVert = true;
     }
 
-    void RopeCut()
+    public void RopeCut()
     {
         AudioManager.Instance.PlaySE("RopeCut");  //フックSE再生
         rope.SetActive(false);
