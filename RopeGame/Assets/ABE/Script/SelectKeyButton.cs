@@ -74,6 +74,11 @@ public class SelectKeyButton : MonoBehaviour
         GameManager.GetGameManager().GetStateMachine().ChangeState(ExecuteSceneState.Instance());
     }
 
+    public void ReturnClear()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void ShotSE()
     {
         AudioManager.Instance.PlaySE("Shoot");  //銃声のSE再生

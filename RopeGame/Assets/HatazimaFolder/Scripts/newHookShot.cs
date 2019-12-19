@@ -77,7 +77,7 @@ public class newHookShot : MonoBehaviour
             //GetComponent<Test1>().enabled = false;
             if (targ != null && targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().SleepState();
             targ = hit.collider.gameObject;
-            if (!targ.CompareTag("Bullet"))
+            if (!targ.CompareTag("Bullet") && !targ.CompareTag("Untagged"))
             {
                 dist = Vector3.Distance(transform.position, targ.transform.position); //現在位置と選択したオブジェクトまでの距離を測る
                 move = true;
@@ -99,7 +99,7 @@ public class newHookShot : MonoBehaviour
         {
             case "Enemy": targ.transform.position = Vector3.MoveTowards(targ.transform.position, transform.position, rollPower * Time.deltaTime); break;
             case "Item": targ.transform.position = Vector3.MoveTowards(targ.transform.position, transform.position, rollPower * Time.deltaTime); break;
-            default: transform.position = Vector3.MoveTowards(transform.position, targ.transform.position, rollPower * Time.deltaTime); break;
+            case "Ground": transform.position = Vector3.MoveTowards(transform.position, targ.transform.position, rollPower * Time.deltaTime); break;
         }
 
         if (10 <= nowDist) //敵に逃げられたらロープを切る
