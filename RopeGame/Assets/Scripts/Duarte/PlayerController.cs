@@ -140,12 +140,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //Respawn function
+    //Get check point
     public void getSpawnpoint(Vector2 point)
     {
         spawnpoint = point;
     }
-
+    //Respawn function
     public void respawn()
     {
         transform.position = spawnpoint;

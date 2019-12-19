@@ -10,7 +10,7 @@ public class PlayerHealthController : MonoBehaviour
     private string PlayerDeathEffect = "PlayerDeathEffect";
     public int currentHealth =5;
     public int maxHealth;
-
+    public string BloodEffect = "BloodEffect";
     float damageInvincLength = 1f;
     private float invincCount;
 
@@ -45,18 +45,16 @@ public class PlayerHealthController : MonoBehaviour
         if (invincCount <= 0)
         {
             currentHealth--;
-
+            EffectManager.instance.playInPlace(PlayerController.instance.playerTrans.position, BloodEffect);
             invincCount = damageInvincLength;
             
             PlayerController.instance.bodySR.color = new Color(PlayerController.instance.bodySR.color.r, PlayerController.instance.bodySR.color.g, PlayerController.instance.bodySR.color.b, .5f);
-
             AudioManager.Instance.PlaySE("Damage");  //ダメージSE再生
             hpBrandy[currentHealth].SetActive(false);
 
             if (currentHealth <= 0)
-            {
+            {    
                 PlayerController.instance.gameObject.SetActive(false);
-
                 var Temp = GameObject.Find("ChangeScene");
                 if(Temp)
                 {
