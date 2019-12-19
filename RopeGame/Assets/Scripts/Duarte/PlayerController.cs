@@ -43,13 +43,13 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        isattacking = false;
         instance = this;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        isattacking = false;
         theCam = Camera.main;
         activeMoveSpeed = moveSpeed;
     }
@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour
         if (attackTimeCounter <= 0)
         {
             attacking = false;
+            isattacking = false;
             anim.SetBool("attacking", false);
         }
     }

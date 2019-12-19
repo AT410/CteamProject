@@ -17,6 +17,7 @@ public class newHookShot : MonoBehaviour
     int rollSe = 0;           //巻き取る際のSEの鳴る頻度
     bool move = false;        //プレイヤーが移動しているか判断する変数
     bool horiVert = false;    //スティックの傾きが前回x軸y軸のどちらに傾いたかの変数
+    public float rollSe;
 
 
     void Start()
