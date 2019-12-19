@@ -69,15 +69,15 @@ public class newHookShot : MonoBehaviour
         Debug.DrawRay(transform.position, vec * 10, Color.red, 3);
         if (hit.collider != null)
         {
-            if (hit.collider.gameObject != gameObject)
+            //GetComponent<Test1>().enabled = false;
+            if (targ != null && targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().SleepState();
+            targ = hit.collider.gameObject;
+            if (!targ.CompareTag("Bullet"))
             {
-                //GetComponent<Test1>().enabled = false;
-                if (targ != null && targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().SleepState();
-                targ = hit.collider.gameObject;
                 dist = Vector3.Distance(transform.position, targ.transform.position); //現在位置と選択したオブジェクトまでの距離を測る
                 move = true;
                 rope.SetActive(true);
-                if(targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().EscapeState();
+                if (targ.CompareTag("Enemy")) targ.GetComponent<EnemyBase>().EscapeState();
                 //線の座標指定
                 line.SetPosition(0, transform.position);
                 line.SetPosition(1, targ.transform.position);
@@ -132,7 +132,10 @@ public class newHookShot : MonoBehaviour
         AudioManager.Instance.PlaySE("RopeCut");  //フックSE再生
         rope.SetActive(false);
         move = false;
-        targ.GetComponent<EnemyBase>().SleepState();
+        if (targ.CompareTag("Enemy"))
+        {
+            targ.GetComponent<EnemyBase>().SleepState();
+        }
         //GetComponent<Test1>().enabled = true;
     }
 
