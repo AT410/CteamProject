@@ -85,6 +85,8 @@ public class ZombieController : EnemyBase
                 RandamMove();
                 break;
             case ("Caught"):
+                DistancePlayer();
+                Resistance();
                 PlayerChase();
                 m_moveX *= -1;
                 m_moveY *= -1;

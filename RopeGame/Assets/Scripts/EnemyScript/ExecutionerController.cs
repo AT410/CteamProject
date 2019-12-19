@@ -88,12 +88,13 @@ public class ExecutionerController : EnemyBase
                 RandamMove();
                 break;
             case ("Caught"):
+                DistancePlayer();
+                Resistance();
                 PlayerChase();
-                m_moveX *= -0.5f;
-                m_moveY *= -0.5f;
+                m_moveX *= -1;
+                m_moveY *= -1;
                 break;
         }
         transform.Translate(m_moveX, m_moveY, 0, Space.World);
     }
-
 }

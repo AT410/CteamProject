@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*spoil行動AI
+ * 作成者　篠﨑*/
 public class SpoilController : EnemyBase
 {
     private float m_currentTime = 0;
@@ -78,11 +80,14 @@ public class SpoilController : EnemyBase
                 break;
             case ("RandamMove"):
                 RandamMove();
+                Debug.Log(m_moveX);
                 break;
             case ("Caught"):
+                DistancePlayer();
+                Resistance();
                 PlayerChase();
-                m_moveX *= -0.8f;
-                m_moveY *= -0.8f;
+                m_moveX *= -1;
+                m_moveY *= -1;
                 break;
         }
         transform.Translate(m_moveX, m_moveY, 0, Space.World);

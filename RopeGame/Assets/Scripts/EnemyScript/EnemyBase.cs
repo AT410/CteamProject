@@ -7,7 +7,9 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour
 {
     [SerializeField]
-    protected float m_speed = 0.05f;//移動速度
+    protected float m_defalutSpeed = 0.05f;
+    [SerializeField]
+    protected float m_speed;//移動速度
     protected float m_rad;//ラジアン変数
     protected float m_moveX;//移動方向代入変数x
     protected float m_moveY;//移動方向代入変数y
@@ -23,14 +25,18 @@ public class EnemyBase : MonoBehaviour
     protected float playerDistance = 8.0f;//プレイヤーとの開ける距離
     protected const float MAXDISTANCE = 10.0f;//最大検知範囲
     protected const float MOVEMENT_RANGE = 2f;//最大目的地移動範囲
-   
+    //抵抗の際の速度係数
+    private const float RESISTANCE_MAX = 1.8f;
+    private const float RESISTANCE_HALF = 1.3f;
+
 
     // Start is called before the first frame update
     protected void Start()
     {
         m_player = GameObject.Find(PLAYER_NAME);
         DestinationDecision();
-    }
+        m_speed = m_defalutSpeed;
+}
     /// <summary>
     /// 衝突判定
     /// </summary>
@@ -95,6 +101,23 @@ public class EnemyBase : MonoBehaviour
     public void SleepState()
     {
         state = "Sleep";
+        m_speed = m_defalutSpeed;
+    }
+    protected void Resistance()
+    {
+        if (m_distance < playerDistance/1.5f)
+        {
+            m_speed = m_defalutSpeed * RESISTANCE_MAX;
+        }
+        else if (m_distance < playerDistance)
+        {
+            m_speed = m_defalutSpeed * RESISTANCE_HALF;
+        }
+        else
+        {
+            m_speed = m_defalutSpeed;
+        }
+
     }
 
 }

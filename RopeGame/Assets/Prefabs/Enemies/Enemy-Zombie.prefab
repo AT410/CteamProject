@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f04d4767b8fb14c9684fd31b226d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_defalutSpeed: 0.03
   m_speed: 0.03
   playerDistance: 1
 --- !u!50 &5408702153222221778
