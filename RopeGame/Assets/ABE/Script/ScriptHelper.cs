@@ -18,6 +18,8 @@ public class StateMachine<T>
     //このステートマシンを持つオーナー
     private T m_Owner;
     //現在のステート
+    private ObjState<T> m_NextState;
+    //現在のステート
     private ObjState<T> m_CurrentState;
     //一つ前のステート
     private ObjState<T> m_PreviousState;
@@ -61,6 +63,7 @@ public class StateMachine<T>
 
     public void ChangeState(ObjState<T> objState)
     {
+        m_NextState = objState;
         m_PreviousState = m_CurrentState;
         if(m_CurrentState!=null && m_Owner!=null)
         {
@@ -78,6 +81,11 @@ public class StateMachine<T>
     public bool ChackState(ObjState<T> other)
     {
         return other == m_CurrentState;
+    }
+
+    public bool ChackNextState(ObjState<T>other)
+    {
+        return other == m_NextState;
     }
 }
 
@@ -105,5 +113,19 @@ public class GlobalCoroutine : MonoBehaviour
         }
 
         Destroy(this.gameObject);              // コルーチン実行用オブジェクトを破棄
+    }
+}
+
+public struct Event
+{
+    //イベント開始地点
+    public Vector3 EventPoint;
+    //開始地点までの移動スピード
+    public float MoveSpeed;
+
+    public Event(Vector3 InEventPoint, float InMoveSpeed)
+    {
+        EventPoint = InEventPoint;
+        MoveSpeed = InMoveSpeed;
     }
 }

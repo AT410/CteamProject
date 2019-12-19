@@ -263,17 +263,45 @@ public class ExecuteSceneState : ObjState<GameManager>
     {
         if (Input.GetKeyDown("joystick button 9")||Input.GetKeyDown(KeyCode.E))
         {
-            other.GetStateMachine().ChangeState(PauseSceneState.Instance());
+            other.GetStateMachine().ChangeState(BossSceneState.Instance());
         }
         UpdateUI(ref other);
+
+        //目標値を達成したらBoss出現
+        if(other.QuestData.Chack100P()==1.0f)
+        {
+            other.GetStateMachine().ChangeState(BossSceneState.Instance());
+        }
     }
 
     public override void Exit(ref GameManager other)
     {
         //
-        other.pauseUI.SetActive(true);
-        //すべての更新を止める
-        Time.timeScale = 0;
+        if (other.GetStateMachine().ChackNextState(PauseSceneState.Instance()))
+        {
+            other.pauseUI.SetActive(true);
+            //すべての更新を止める
+            Time.timeScale = 0;
+        }
+        //ToBossState
+        if(other.GetStateMachine().ChackNextState(BossSceneState.Instance()))
+        {
+            //クエストUIを非表示
+            QuestUI.instance.enabled = false;
+            var Obj = GameObject.Find("QuestUIs");
+            if(Obj)
+            {
+                Obj.SetActive(false);
+            }
+            //現在配置されているEnemyを削除または、非アクティブ
+            var EnemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach(var Enemy in EnemyObjects)
+            {
+                GameObject.Destroy(Enemy);
+            }
+            //現在の全コルーチンを停止
+            other.StopAllCoroutines();
+        }
     }
 
     private void UpdateUI(ref GameManager other)
@@ -288,6 +316,39 @@ public class ExecuteSceneState : ObjState<GameManager>
     }
 }
 
+/// <summary>
+/// Boss出現中
+/// </summary>
+public class BossSceneState :ObjState<GameManager>
+{
+    private static BossSceneState _instance = new BossSceneState();
+
+    public static BossSceneState Instance()
+    {
+        return _instance;
+    }
+
+    private BossSceneState() { }
+
+    public override void Enter(ref GameManager other)
+    {
+        //Bossの出現イベントを発生させる
+    }
+
+    public override void Execute(ref GameManager other)
+    {
+        //Bossの出現イベントが終わったら(カメラが
+    }
+
+    public override void Exit(ref GameManager other)
+    {
+
+    }
+}
+
+/// <summary>
+/// ポーズ中
+/// </summary>
 public class PauseSceneState : ObjState<GameManager>
 {
     private static PauseSceneState _instance = new PauseSceneState();
