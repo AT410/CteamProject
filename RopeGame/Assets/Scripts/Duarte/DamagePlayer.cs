@@ -22,7 +22,6 @@ public class DamagePlayer : MonoBehaviour
         if(other.tag == "Player")
         {
             PlayerHealthController.instance.DamagePlayer();
-            EffectManager.instance.playInPlace(transform.position, BloodEffect);
         }
     }
 
@@ -31,7 +30,6 @@ public class DamagePlayer : MonoBehaviour
         if (other.tag == "Player")
         {
             PlayerHealthController.instance.DamagePlayer();
-            EffectManager.instance.playInPlace(transform.position, BloodEffect);
         }
     }
 
@@ -40,7 +38,6 @@ public class DamagePlayer : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             PlayerHealthController.instance.DamagePlayer();
-            EffectManager.instance.playInPlace(transform.position, BloodEffect);
         }
     }
 
@@ -48,7 +45,6 @@ public class DamagePlayer : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            EffectManager.instance.playInPlace(transform.position, BloodEffect);
             PlayerHealthController.instance.DamagePlayer();
         }
     }

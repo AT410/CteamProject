@@ -1164,6 +1164,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!61 &474429120
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474429113}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.8125, y: 1}
+    newSize: {x: 0.8125, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8125, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &517666539
 GameObject:
   m_ObjectHideFlags: 0
@@ -2997,6 +3023,7 @@ MonoBehaviour:
   hpBrandy: []
   currentHealth: 0
   maxHealth: 0
+  BloodEffect: BloodEffect
 --- !u!222 &1199263501
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4375,6 +4402,7 @@ MonoBehaviour:
   hpBrandy: []
   currentHealth: 0
   maxHealth: 5
+  BloodEffect: BloodEffect
 --- !u!114 &2000992699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4838,7 +4866,7 @@ PrefabInstance:
     - target: {fileID: 1132730980313190265, guid: c59c46d6e1afbff46b4cd8c0ea33101f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1132730980313190213, guid: c59c46d6e1afbff46b4cd8c0ea33101f,
         type: 3}
@@ -5006,7 +5034,7 @@ PrefabInstance:
     - target: {fileID: 395517906254465073, guid: 76e4ae09c8afd094aad68c58b985dc6f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 395517906254465037, guid: 76e4ae09c8afd094aad68c58b985dc6f,
         type: 3}
@@ -5061,6 +5089,11 @@ PrefabInstance:
     - target: {fileID: 395517906254465037, guid: 76e4ae09c8afd094aad68c58b985dc6f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 395517905856135491, guid: 76e4ae09c8afd094aad68c58b985dc6f,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5228,7 +5261,7 @@ PrefabInstance:
     - target: {fileID: 4925725634693261304, guid: b86994520d561cc44a90490b6ff2bf72,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4925725634693261252, guid: b86994520d561cc44a90490b6ff2bf72,
         type: 3}
@@ -5379,7 +5412,28 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1651025483954227086, guid: e695c98974b0f68458e00ac5578a6f9c,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.024545908
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651025483954227086, guid: e695c98974b0f68458e00ac5578a6f9c,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.2236414
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651025483954227086, guid: e695c98974b0f68458e00ac5578a6f9c,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.03001678
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651025483954227086, guid: e695c98974b0f68458e00ac5578a6f9c,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.0690081
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1651025483954227086, guid: e695c98974b0f68458e00ac5578a6f9c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e695c98974b0f68458e00ac5578a6f9c, type: 3}
 --- !u!1 &8722846596804335405 stripped
 GameObject:
