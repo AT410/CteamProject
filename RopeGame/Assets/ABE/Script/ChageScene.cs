@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class ChageScene : MonoBehaviour
 {
+    
+
     [SerializeField]
-    [Range(0.0f, 5.0f)]
+    [Range(0.0f, 50.0f)]
     private float _fadeTime;
 
     public float FadeTime
@@ -75,10 +77,15 @@ public class ChageScene : MonoBehaviour
         }
     }
 
+    //実行中フラグ
+    public bool IsRunning = false;
+
+    public bool EndExe = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        if(_fadetype==FadeType.FadeOut)
+        if(_fadetype==FadeType.FadeOut && IsRunning ==false)
         {
             PushStart();
         }
@@ -87,13 +94,16 @@ public class ChageScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (IsRunning)
+            return;
+
         switch (_cangetype)
         { 
             case ChangeType.TimeLimit:
-                StartCoroutine(LimitMove());
+                GoCoroutine(LimitMove());
                 break;
             case ChangeType.Fade:
-                StartCoroutine(fadeMove());
+                GoCoroutine(fadeMove());
                 break;
         }   
     }
@@ -101,7 +111,12 @@ public class ChageScene : MonoBehaviour
     public void PushStart()
     {
         Test = true;
-        StartCoroutine(fadeMove());
+        GoCoroutine(fadeMove());
+    }
+
+    private void GoCoroutine(IEnumerator Active)
+    {
+        GlobalCoroutine.Go(Active);
     }
 
     public void SetFadeColor(Color change)
@@ -112,11 +127,18 @@ public class ChageScene : MonoBehaviour
     private IEnumerator LimitMove()
     {
         yield return new WaitForSeconds(_fadeTime);
+        IsRunning = true;
         LoadScene();
+        IsRunning = false;
+        
     }
 
     private IEnumerator fadeMove()
     {
+        if (IsRunning)
+            yield break;
+        IsRunning = true;
+
         if (Test)
         {
             switch (_fadetype)
@@ -145,6 +167,7 @@ public class ChageScene : MonoBehaviour
                     break;
             }
         }
+        IsRunning = false;
         yield break;
     }
 

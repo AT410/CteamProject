@@ -47,7 +47,17 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Ins = this;
+        if (Ins ==null)
+        {
+            Ins = this;
+        }
+        else
+        {
+            Debug.Log("Awake:GM");
+        }
+
+        //gameObject.SetActive(false);
+        //state.IsUpdateActive = false;
     }
 
 
@@ -104,15 +114,16 @@ public class GameManager : MonoBehaviour
         if (Next.name != "MainGameScene")
         {
             state.IsUpdateActive = false;
+            //gameObject.SetActive(false);
             return;
         }
         else
         {
             //クエスト生成
             CreateQuest();
+            state.IsUpdateActive = true;
         }
-
-        state.IsUpdateActive = true;
+        //gameObject.SetActive(true);
         return;
     }
 

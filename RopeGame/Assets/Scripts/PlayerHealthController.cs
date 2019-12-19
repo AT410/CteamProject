@@ -53,12 +53,16 @@ public class PlayerHealthController : MonoBehaviour
            {
                PlayerController.instance.gameObject.SetActive(false);
 
-                GameManager.GetGameManager().GetComponent<ChageScene>().SceneName = "GameOverScene";
-                Color DeathFadeC = new Color(201.0f/255.0f,51.0f/255.0f,41.0f/255.0f);
-                GameManager.GetGameManager().GetComponent<ChageScene>().SetFadeColor(DeathFadeC);
-                GameManager.GetGameManager().GetComponent<ChageScene>().PushStart();
-               //UIController.instance.deathScreen.SetActive(true);
-           }
+                var Temp = GameObject.Find("ChangeScene");
+                if(Temp)
+                {
+                    Temp.GetComponent<ChageScene>().SceneName = "GameOverScene";
+                    Color DeathFadeC = new Color(201.0f / 255.0f, 51.0f / 255.0f, 41.0f / 255.0f);
+                    Temp.GetComponent<ChageScene>().SetFadeColor(DeathFadeC);
+                    Temp.GetComponent<ChageScene>().PushStart();
+                }
+                //UIController.instance.deathScreen.SetActive(true);
+            }
 
            UIController.instance.healthSlider.value = currentHealth;
            UIController.instance.healthText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
