@@ -34,11 +34,14 @@ public class PlayerController : MonoBehaviour
     //Spawn variables
     Vector2 spawnpoint = Vector2.zero;
 
+    public bool isattacking;
+
     //Effects
     private string DodgeEffect = "DodgeEffect";
 
     private void Awake()
     {
+        isattacking = false;
         instance = this;
     }
 
@@ -53,7 +56,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Functions
-        MovePlayer();
+        if(!isattacking)
+        {
+            MovePlayer();
+        }
         Attack();
         Dodge();
     }
@@ -83,7 +89,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
+
             attackTimeCounter = attackTime;
+            isattacking = true;
             attacking = true;
             theRB.velocity = Vector2.zero;
             anim.SetBool("attacking", true);

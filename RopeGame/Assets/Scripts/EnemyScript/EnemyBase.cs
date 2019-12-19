@@ -44,6 +44,10 @@ public class EnemyBase : MonoBehaviour
     [SerializeField]
     protected EnemyType _enemyType;
 
+    //エフェクトの変数
+    private string EnemyDeathEffect = "EnemyDeathEffect";
+    private string PlayerAttackEffect = "PlayerAttackEffect";
+
     // Start is called before the first frame update
     protected void Start()
     {
@@ -182,7 +186,7 @@ public class EnemyBase : MonoBehaviour
     {
         if (collision.name.Contains(PLAYER_SHOT))
         {
-            //捕獲エフェクト等はここに
+            EffectManager.instance.playInPlace(transform.position, PlayerAttackEffect);
             gameObject.SetActive(false);
         }
     }

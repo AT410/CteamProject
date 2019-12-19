@@ -8,6 +8,8 @@ public class ZombieController : EnemyBase
 {
     private float m_attckCount = 0;       //攻撃カウント
     private float m_attckTime     = 0.5f;    //攻撃速度
+    public float timefordeath = 3f;
+    private string EnemyDeathEffect = "EnemyDeathEffect";
 
     void Update()
     {
