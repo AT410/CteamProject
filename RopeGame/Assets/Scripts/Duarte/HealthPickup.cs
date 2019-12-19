@@ -27,7 +27,7 @@ public class HealthPickup : MonoBehaviour
         if(other.tag == "Player")
         {
             PlayerHealthController.instance.HealPlayer(healAmount);
-            EffectManager.instance.playInPlace(transform.position, HealthPickUpEffect);
+            //EffectManager.instance.playInPlace(transform.position, HealthPickUpEffect);
             Destroy(gameObject);
         }
     }
