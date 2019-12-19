@@ -23,8 +23,8 @@ public struct CompletValue
         Del3 = Random.Range(3, 6);
 
         T1 = Del1;
-        T2 = Del2;
-        T3 = Del3;
+        T2 = 0;
+        T3 = 0;
         All = T1 + T2 + T3;
     }
 
@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
         while(Objects.Count != MaxNumObjects)
         {
             int SelectNum  = Random.Range(0,EnemyPrefabs.Count);
-            var Pre = EnemyPrefabs[SelectNum];
+            var Pre = EnemyPrefabs[0];
             Vector3 Pos = new Vector3(Random.Range(-4, 4), Random.Range(-4, 4));
             var s = GameObject.Instantiate(Pre, Pos,Quaternion.identity);
             Objects.Enqueue(s);
@@ -261,7 +261,7 @@ public class ExecuteSceneState : ObjState<GameManager>
 
     public override void Execute(ref GameManager other)
     {
-        if (Input.GetKeyDown("joystick button 9")||Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown("joystick button 9")||Input.GetKeyDown(KeyCode.U))
         {
             other.GetStateMachine().ChangeState(BossSceneState.Instance());
         }
@@ -333,11 +333,17 @@ public class BossSceneState :ObjState<GameManager>
     public override void Enter(ref GameManager other)
     {
         //Bossの出現イベントを発生させる
+        //イベント
+        EventScript.Instance().GetStateMachine().ChangeState(GoToEventState.Instance());
     }
 
     public override void Execute(ref GameManager other)
     {
         //Bossの出現イベントが終わったら(カメラが
+        if (EventScript.Instance().GetStateMachine().ChackState(DefaultEventState.Instance()))
+        {
+            Debug.Log("WWWWWW");
+        }
     }
 
     public override void Exit(ref GameManager other)

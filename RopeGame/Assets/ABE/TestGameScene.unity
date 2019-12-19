@@ -2374,8 +2374,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c74ea536ae7e3f45a053adf3ee738a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainCamera: {fileID: 519420031}
+  MainCamera: {fileID: 519420028}
   Player: {fileID: 1140383786}
+  BossPrefub: {fileID: 395517906254465073, guid: 76e4ae09c8afd094aad68c58b985dc6f,
+    type: 3}
 --- !u!4 &1064530586
 Transform:
   m_ObjectHideFlags: 0
@@ -2504,6 +2506,7 @@ MonoBehaviour:
   dashInvincibility: 0.5
   dashCounter: 0
   attackTime: 0.3
+  isattacking: 0
 --- !u!50 &1140383788
 Rigidbody2D:
   serializedVersion: 4
@@ -4292,12 +4295,12 @@ PrefabInstance:
         type: 3}
       propertyPath: EnemyPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 1670703790}
+      objectReference: {fileID: 382507609}
     - target: {fileID: 3122293791824997799, guid: 47f73b819c0a58a4a97104512dca7010,
         type: 3}
       propertyPath: EnemyPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 382507609}
+      objectReference: {fileID: 1670703790}
     - target: {fileID: 3122293791824997799, guid: 47f73b819c0a58a4a97104512dca7010,
         type: 3}
       propertyPath: EnemyPrefabs.Array.data[2]
