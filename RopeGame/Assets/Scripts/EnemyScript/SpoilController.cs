@@ -5,16 +5,9 @@ using UnityEngine;
 /*spoil行動AI
  * 作成者　篠﨑*/
 public class SpoilController : EnemyBase
-{
-    private float m_currentTime = 0;
-    private float m_stopTime = 1f;
-    public Animator anim;
-   // public Animator Anim { get { return this._anim ? this._anim : this._anim = GetComponent<Animator>(); } }
-    // Update is called once per frame
-    //  private string state;
+{ 
     void Update()
     {
-        //Debug.Log(state);
         if (state != "Caught")
         {
             if (state == "Sleep")
@@ -28,14 +21,10 @@ public class SpoilController : EnemyBase
             }
             else
             {
-
                 ActionPolicy();
-
             }
         }
         StateCheck();
-
-      
     }
     /// <summary>
     /// 行動方針を決定する
@@ -60,37 +49,5 @@ public class SpoilController : EnemyBase
         {
             state = "RandamMove";
         }
-
     }
-    /// <summary>
-    /// 状態チェック
-    /// </summary>
-    private void StateCheck()
-    {
-        switch (state)
-        {
-            case ("Away"):
-                m_moveX *= -1;
-                m_moveY *= -1;
-
-                break;
-            case ("Sleep"):
-                m_moveX = 0;
-                m_moveY = 0;
-                break;
-            case ("RandamMove"):
-                RandamMove();
-                Debug.Log(m_moveX);
-                break;
-            case ("Caught"):
-                DistancePlayer();
-                Resistance();
-                PlayerChase();
-                m_moveX *= -1;
-                m_moveY *= -1;
-                break;
-        }
-        transform.Translate(m_moveX, m_moveY, 0, Space.World);
-    }
-
 }

@@ -6,12 +6,9 @@ using UnityEngine;
   *製作者　篠﨑*/
 public class ExecutionerController : EnemyBase
 {
-    private float m_currentTime = 0;
-    private float m_stopTime = 1f;
     [SerializeField]
-    private EnemyShot enemyShot;
-    // Update is called once per frame
-    //  private string state;
+    private EnemyShot enemyShot;    //弾を格納する変数
+
     void Update()
     {
         if (state != "Caught")
@@ -64,37 +61,5 @@ public class ExecutionerController : EnemyBase
         {
             state = "RandamMove";
         }
-    }
-    /// <summary>
-    /// 状態チェック
-    /// </summary>
-    private void StateCheck()
-    {
-        switch (state)
-        {
-            case ("Approch"):
-               
-                break;
-            case ("Away"):
-                m_moveX *= -1;
-                m_moveY *= -1;
-               
-                break;
-            case ("Sleep"):
-                m_moveX = 0;
-                m_moveY = 0;
-                break;
-            case ("RandamMove"):
-                RandamMove();
-                break;
-            case ("Caught"):
-                DistancePlayer();
-                Resistance();
-                PlayerChase();
-                m_moveX *= -1;
-                m_moveY *= -1;
-                break;
-        }
-        transform.Translate(m_moveX, m_moveY, 0, Space.World);
     }
 }

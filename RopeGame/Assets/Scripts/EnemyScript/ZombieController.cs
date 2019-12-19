@@ -6,16 +6,11 @@ using UnityEngine;
   *製作者　篠﨑*/
 public class ZombieController : EnemyBase
 {
-    private float m_currentTime = 0;
-    private float m_stopTime = 1f;
-    private float m_currentTime2 = 0;//攻撃カウント
-    private float m_shotTime = 0.5f;//攻撃速度
-    const string PLAYERNAME = "Player";//ヒエルラキー上のプレイヤーの名前
-    // Update is called once per frame
-    //  private string state;
+    private float m_attckCount = 0;       //攻撃カウント
+    private float m_attckTime     = 0.5f;    //攻撃速度
+
     void Update()
     {
-        Debug.Log(state);
         if (state != "Caught")
         {
             if (state == "Sleep")
@@ -62,49 +57,18 @@ public class ZombieController : EnemyBase
             state = "RandamMove";
         }
     }
-    /// <summary>
-    /// 状態チェック
-    /// </summary>
-    private void StateCheck()
-    {
-        switch (state)
-        {
-            case ("Approch"):
-
-                break;
-            case ("Away"):
-                m_moveX *= -1;
-                m_moveY *= -1;
-
-                break;
-            case ("Sleep"):
-                m_moveX = 0;
-                m_moveY = 0;
-                break;
-            case ("RandamMove"):
-                RandamMove();
-                break;
-            case ("Caught"):
-                DistancePlayer();
-                Resistance();
-                PlayerChase();
-                m_moveX *= -1;
-                m_moveY *= -1;
-                break;
-        }
-        transform.Translate(m_moveX, m_moveY, 0, Space.World);
-    }
+   
   
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player"&& state !="Caught")
+        if (collision.gameObject.name == PLAYER_NAME && state !="Caught")
         {
-            m_currentTime2 += Time.deltaTime;
-            if (m_shotTime < m_currentTime2)
+            m_attckCount += Time.deltaTime;
+            if (m_attckTime < m_attckCount)
             {
                 //攻撃エフェクトはここに
                 PlayerHealthController.instance.DamagePlayer();
-                m_currentTime2 = 0;
+                m_attckCount = 0;
             }
         }
     }
