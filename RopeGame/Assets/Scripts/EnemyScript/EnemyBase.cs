@@ -135,7 +135,7 @@ public class EnemyBase : MonoBehaviour
     /// <summary>
     /// プレイヤーが近いほど抵抗を上げる関数
     /// </summary>
-    protected void Resistance()
+    public virtual void Resistance()
     {
         if (m_distance < playerDistance/1.5f)
         {
