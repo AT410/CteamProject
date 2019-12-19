@@ -191,9 +191,4 @@ public class EnemyBase : MonoBehaviour
         return _enemyType;
     }
 
-    public EnemyType GetEnemyType()
-    {
-        return _enemyType;
-    }
-
 }
