@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyType
+{
+    Zomib,
+    Thief,
+    Executioner,
+    BOSS
+}
+
 /*敵AI基底行動Script
   *製作者　篠﨑*/
 public class EnemyBase : MonoBehaviour
@@ -33,6 +41,8 @@ public class EnemyBase : MonoBehaviour
     private const float  RESISTANCE_MAX  = 1.8f;            //抵抗の際の速度係数
     private const float  RESISTANCE_HALF = 1.3f;
 
+    [SerializeField]
+    protected EnemyType _enemyType;
 
     // Start is called before the first frame update
     protected void Start()
@@ -176,4 +186,9 @@ public class EnemyBase : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+    public EnemyType GetEnemyType()
+    {
+        return _enemyType;
+    }
+
 }

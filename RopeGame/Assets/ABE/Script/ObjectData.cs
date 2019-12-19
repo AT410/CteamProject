@@ -4,13 +4,7 @@ using System;
 using UnityEngine;
 using UnityEditor;
 
-public enum EnemyType
-{
-    Zomib,
-    Thief,
-    Executioner,
-    BOSS
-}
+
 
 public class ObjectData : ScriptableObject
 {

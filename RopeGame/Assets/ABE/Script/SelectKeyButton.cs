@@ -63,9 +63,14 @@ public class SelectKeyButton : MonoBehaviour
 
     public void RetrunTitleScene()
     {
-        GameManager.GetGameManager().GetComponent<ChageScene>().FadeTime = 1.0f;
-        GameManager.GetGameManager().GetComponent<ChageScene>().SceneName = "Title";
-        GameManager.GetGameManager().GetComponent<ChageScene>().PushStart();
+        var Temp = GameObject.Find("ChangeScene");
+        if (Temp)
+        {
+            Temp.GetComponent<ChageScene>().FadeTime = 1.0f;
+            Color DeathFadeC = new Color(201.0f / 255.0f, 51.0f / 255.0f, 41.0f / 255.0f);
+            Temp.GetComponent<ChageScene>().SceneName = "Title";
+            Temp.GetComponent<ChageScene>().PushStart();
+        }
         GameManager.GetGameManager().GetStateMachine().ChangeState(ExecuteSceneState.Instance());
     }
 

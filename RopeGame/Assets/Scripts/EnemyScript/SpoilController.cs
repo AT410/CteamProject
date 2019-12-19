@@ -49,5 +49,36 @@ public class SpoilController : EnemyBase
         {
             state = "RandamMove";
         }
+
+    }
+    /// <summary>
+    /// 状態チェック
+    /// </summary>
+    private void StateCheck()
+    {
+        switch (state)
+        {
+            case ("Away"):
+                m_moveX *= -1;
+                m_moveY *= -1;
+
+                break;
+            case ("Sleep"):
+                m_moveX = 0;
+                m_moveY = 0;
+                break;
+            case ("RandamMove"):
+                RandamMove();
+                //Debug.Log(m_moveX);
+                break;
+            case ("Caught"):
+                DistancePlayer();
+                Resistance();
+                PlayerChase();
+                m_moveX *= -1;
+                m_moveY *= -1;
+                break;
+        }
+        transform.Translate(m_moveX, m_moveY, 0, Space.World);
     }
 }
