@@ -11,12 +11,12 @@ public class Cameracontroller : MonoBehaviour
     {
         move = 0;
 
-        if(player.transform.position.y > 7 || player.transform.position.y < -7)
+        if(player.transform.position.y > 17 || player.transform.position.y < -5.2f)
         {
             move++;
         }
 
-        if(player.transform.position.x > 7 || player.transform.position.x < -7)
+        if(player.transform.position.x > 19.9f || player.transform.position.x < -19.9f)
         {
             move += 2;
         }

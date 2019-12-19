@@ -6,6 +6,7 @@ public class newHookShot : MonoBehaviour
 {
     public GameObject star;   //このオブジェクトの方向にレイを飛ばす
     public GameObject rope;   //ロープ(LineRenderer)を使うためのオブジェクト
+    public GameObject healthController;
     public LineRenderer line; //ロープ
     GameObject targ;          //レイが当たったオブジェクトの座標
     RaycastHit hit;           //レイが当たったオブジェクトの様々な情報を格納する変数
@@ -17,7 +18,6 @@ public class newHookShot : MonoBehaviour
     int rollSe = 0;           //巻き取る際のSEの鳴る頻度
     bool move = false;        //プレイヤーが移動しているか判断する変数
     bool horiVert = false;    //スティックの傾きが前回x軸y軸のどちらに傾いたかの変数
-    public float rollSe;
 
 
     void Start()
@@ -29,6 +29,18 @@ public class newHookShot : MonoBehaviour
         rope.SetActive(false);                 //ラインを使うまで隠しておく
     }
     
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!move)
+        {
+            if (collision.gameObject.CompareTag("Valley"))
+            {
+                transform.position = new Vector3(0, 0, -1);
+                healthController.GetComponent<PlayerHealthController>().DamagePlayer();
+            }
+        }
+    }
+
     void Update()
     {
         if(!move)
