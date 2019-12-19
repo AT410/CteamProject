@@ -30,7 +30,9 @@ public class PlayerController : MonoBehaviour
     private float attackTime = 0.3f;
     private bool attacking = false;
     private float attackTimeCounter;
-
+    public bool dodge = false;
+    
+   
     //Spawn variables
     Vector2 spawnpoint = Vector2.zero;
 
@@ -122,6 +124,11 @@ public class PlayerController : MonoBehaviour
                 EffectManager.instance.playInPlace(transform.position, DodgeEffect);
                 PlayerHealthController.instance.MakeInvincible(dashInvincibility);
             }
+            dodge = true;
+        }
+        else
+        {
+            dodge = false;
         }
 
         if (dashCounter > 0)
