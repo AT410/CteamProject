@@ -7,7 +7,7 @@ public class EventScript : MonoBehaviour
     /// <summary>
     /// イベントプール
     /// </summary>
-    private Dictionary<string, Event> EventPool = new Dictionary<string, Event>();
+    private Dictionary<string, MakeEvent> EventPool = new Dictionary<string, MakeEvent>();
 
     //イベント開始時のPlayerのポジション
 
@@ -15,7 +15,7 @@ public class EventScript : MonoBehaviour
     StateMachine<EventScript> state;
 
     [SerializeField]
-    private Camera MainCamera;
+    private GameObject MainCamera;
 
     [SerializeField]
     private GameObject Player;
@@ -28,12 +28,13 @@ public class EventScript : MonoBehaviour
     private void Awake()
     {
         EventPool.Clear();
-        EventPool.Add("BossEvent", new Event(new Vector3(10, 10, 0), 1.0f));
+        EventPool.Add("BossEvent", new MakeEvent(new Vector3(5, 5, 0), 1.0f));
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        state = new StateMachine<EventScript>(this);
         state.ChangeState(DefaultEventState.Instance());
     }
 
@@ -43,7 +44,7 @@ public class EventScript : MonoBehaviour
         state.Update();
     }
 
-    public Event GetEvent(string key)
+    public MakeEvent GetEvent(string key)
     {
         return EventPool[key];
     }
@@ -62,7 +63,17 @@ public class EventScript : MonoBehaviour
 
     public void UpdateCamera(Vector3 MoveForce)
     {
-        MainCamera.transform.position += MoveForce;
+        MainCamera.transform.position += new Vector3(MoveForce.x,MoveForce.y,0.0f);
+    }
+
+    public Vector3 GetPlayerPos()
+    {
+        return Player.transform.position;
+    }
+
+    public Vector3 GetCameraPos()
+    {
+        return MainCamera.transform.position;
     }
 }
 
@@ -123,7 +134,7 @@ public class EventActiveState : ObjState<EventScript>
 
     public override void Enter(ref EventScript other)
     {
-
+        Debug.Log("StartMove");
     }
 
     public override void Execute(ref EventScript other)
@@ -139,7 +150,7 @@ public class EventActiveState : ObjState<EventScript>
 
     public override void Exit(ref EventScript other)
     {
-
+        Debug.Log("StartMove");
     }
 }
 
@@ -168,15 +179,12 @@ public class MoveToEventState : ObjState<EventScript>
 
     private Vector3 ToTargetPoint;
 
-    private float _TotalTime;
+    private float _TotalTime=5;
 
     private float _CurrntTime;
 
     public override void Enter(ref EventScript other)
     {
-        //移動地点の取得
-        var Event = other.GetEvent("Boss");
-
         //イベント開始地点に移動を開始する
         //前回と移動が異なるとき向きを変える
         if (MoveAxis != BeforeActive)
@@ -185,10 +193,19 @@ public class MoveToEventState : ObjState<EventScript>
             StartPositon = ToTargetPoint;
             ToTargetPoint = Temp;
         }
+        else
+        {
+            //移動地点の取得
+            var Event = other.GetEvent("BossEvent");
+            _TotalTime = Event.MoveSpeed;
+            ToTargetPoint = Event.EventPoint;
+            StartPositon = other.GetPlayerPos();
+        }
 
         //前回の移動方向を同期
         BeforeActive = MoveAxis;
         _CurrntTime = 0;
+        Debug.Log("MoveStart");
     }
 
     public override void Execute(ref EventScript other)
@@ -200,6 +217,7 @@ public class MoveToEventState : ObjState<EventScript>
         if (other.CheckPosition())
         {
             other.GetStateMachine().ChangeState(EventActiveState.Instance());
+            Debug.Log("MoveEnd");
         }
     }
 
@@ -213,8 +231,10 @@ public class MoveToEventState : ObjState<EventScript>
     {
         _CurrntTime /= _TotalTime;
         var SpanVec = ToTargetPoint - StartPositon;
-        var Force = SpanVec * _CurrntTime * _CurrntTime + StartPositon;
-        StartPositon -= Force;
+
+        var Force = SpanVec * Time.deltaTime;
+        Debug.Log(Force);
         other.UpdateCamera(Force);
+        StartPositon = other.GetCameraPos();
     }
 }

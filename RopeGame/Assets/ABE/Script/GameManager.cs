@@ -261,7 +261,7 @@ public class ExecuteSceneState : ObjState<GameManager>
 
     public override void Execute(ref GameManager other)
     {
-        if (Input.GetKeyDown("joystick button 9")||Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown("joystick button 9")||Input.GetKeyDown(KeyCode.Return))
         {
             other.GetStateMachine().ChangeState(BossSceneState.Instance());
         }
