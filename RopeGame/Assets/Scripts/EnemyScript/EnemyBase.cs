@@ -15,22 +15,32 @@ public enum EnemyType
 public class EnemyBase : MonoBehaviour
 {
     [SerializeField]
-    protected float m_speed = 0.05f;//移動速度
-    protected float m_rad;//ラジアン変数
-    protected float m_moveX;//移動方向代入変数x
-    protected float m_moveY;//移動方向代入変数y
-    protected float m_destinationX;//ランダム移動目的地x
-    protected float m_destinationY;//ランダム移動目的地y
-    protected int m_tmp;//sqrtを使う前に入れる
-    protected double m_distance;//プレイヤーとの距離を代入
-    protected GameObject m_player;//プレイヤー格納変数
-    protected string state = "RandamMove";
-    const string PLAYER_NAME = "Player";//ヒエルラキー上のプレイヤー名
-    const string PLAYER_SHOT = "Player_Shot";
+    protected float m_defalutSpeed = 0.05f;
     [SerializeField]
     protected float playerDistance = 8.0f;//プレイヤーとの開ける距離
-    protected const float MAXDISTANCE = 10.0f;//最大検知範囲
-    protected const float MOVEMENT_RANGE = 2f;//最大目的地移動範囲
+
+    protected int   m_tmp;                  //sqrtを使う前に入れる
+    protected float m_rad;                  //ラジアン変数
+    protected float m_moveX;                //移動方向代入変数x
+    protected float m_moveY;                //移動方向代入変数y
+    protected float m_destinationX;         //ランダム移動目的地x
+    protected float m_destinationY;         //ランダム移動目的地y
+    protected float m_speed;                //移動速度
+    protected float m_currentTime = 0;  　　//state"Sleep"時間測定
+    protected float m_stopTime    = 1.0f;   //state"Sleep"待機時間
+
+    protected double     m_distance;    //プレイヤーとの距離を代入
+    protected GameObject m_player;      //プレイヤー格納変数
+    protected string     state = "RandamMove";
+
+    protected const float MAXDISTANCE    = 10.0f;         //最大検知範囲
+    protected const float MOVEMENT_RANGE = 2f;            //最大目的地移動範囲
+    protected const string PLAYER_NAME     = "Player";    //ヒエルラキー上のプレイヤー名
+
+    private const string PLAYER_SHOT     = "Player_Shot";   //ヒエルラキー上のプレイヤーの弾名
+    private const float  RESISTANCE_MAX  = 1.8f;            //抵抗の際の速度係数
+    private const float  RESISTANCE_HALF = 1.3f;
+
     [SerializeField]
     protected EnemyType _enemyType;
 
@@ -39,19 +49,9 @@ public class EnemyBase : MonoBehaviour
     {
         m_player = GameObject.Find(PLAYER_NAME);
         DestinationDecision();
+        m_speed = m_defalutSpeed;
     }
-    /// <summary>
-    /// 衝突判定
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.name.Contains(PLAYER_SHOT))
-        {
-            //捕獲エフェクト等はここに
-            gameObject.SetActive(false);
-        }
-    }
+    
     /// <summary>
     /// 敵追跡関数
     /// </summary>
@@ -96,6 +96,41 @@ public class EnemyBase : MonoBehaviour
         m_moveX = m_speed * Mathf.Cos(m_rad);
         m_moveY = m_speed * Mathf.Sin(m_rad);
     }
+    /// <summary>
+    /// 状態チェック
+    /// </summary>
+    protected void StateCheck()
+    {
+        switch (state)
+        {
+            case ("Approch"):
+
+                break;
+            case ("Away"):
+                m_moveX *= -1;
+                m_moveY *= -1;
+
+                break;
+            case ("Sleep"):
+                m_moveX = 0;
+                m_moveY = 0;
+                break;
+            case ("RandamMove"):
+                RandamMove();
+                break;
+            case ("Caught"):
+                DistancePlayer();
+                Resistance();
+                PlayerChase();
+                m_moveX *= -1;
+                m_moveY *= -1;
+                break;
+        }
+        transform.Translate(m_moveX, m_moveY, 0, Space.World);
+    }
+    /// <summary>
+    /// 状態の切り替え（他スクリプトで切り替え、 SleepStateも同じ）
+    /// </summary>
     public void EscapeState()
     {
         state = "Caught";
@@ -104,6 +139,56 @@ public class EnemyBase : MonoBehaviour
     public void SleepState()
     {
         state = "Sleep";
+        m_speed = m_defalutSpeed;
+    }
+
+    /// <summary>
+    /// プレイヤーが近いほど抵抗を上げる関数
+    /// </summary>
+    protected void Resistance()
+    {
+        if (m_distance < playerDistance/1.5f)
+        {
+            m_speed = m_defalutSpeed * RESISTANCE_MAX;
+        }
+        else if (m_distance < playerDistance)
+        {
+            m_speed = m_defalutSpeed * RESISTANCE_HALF;
+        }
+        else
+        {
+            m_speed = m_defalutSpeed;
+        }
+
+    }
+    /// <summary>
+    /// 壁にぶつかった時は移動先変更させる
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.CompareTag("Wall")&&state != "Caught")
+        {
+            DestinationDecision();
+            state = "RandamMove";
+        }
+    }
+    /// <summary>
+    /// 衝突判定
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name.Contains(PLAYER_SHOT))
+        {
+            //捕獲エフェクト等はここに
+            gameObject.SetActive(false);
+        }
+    }
+    public EnemyType GetEnemyType()
+    {
+        return _enemyType;
     }
 
     public EnemyType GetEnemyType()

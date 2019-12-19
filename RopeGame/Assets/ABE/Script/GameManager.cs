@@ -9,11 +9,11 @@ using UnityEngine.SceneManagement;
 
 public struct CompletValue
 {
-    public int T1;
-    public int T2;
-    public int T3;
+    public float T1;
+    public float T2;
+    public float T3;
 
-    private int All;
+    private float All;
 
     public CompletValue(int I = 0)
     {
@@ -31,6 +31,7 @@ public struct CompletValue
     public float Chack100P()
     {
         var P = T1 + T2 + T3;
+        Debug.Log(P / All);
         return 1.0f-(P / All);
     }
 }
@@ -67,7 +68,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> EnemyPrefabs = new List<GameObject>();
 
-    public GameObject Test;
+    [SerializeField]
+    public CompletValue BossEnemy;
 
     private Queue<GameObject> Objects;
 
@@ -133,7 +135,7 @@ public class GameManager : MonoBehaviour
         //StartCoroutine(CreateObject());
         state.Update();
 
-        Debug.Log(QuestData.T1);
+        Debug.Log(QuestData.Chack100P());
         //ChackNumObj();
         //SleepObj();
     }
@@ -166,7 +168,7 @@ public class GameManager : MonoBehaviour
             Vector3 Pos = new Vector3(Random.Range(-4, 4), Random.Range(-4, 4));
             var s = GameObject.Instantiate(Pre, Pos,Quaternion.identity);
             Objects.Enqueue(s);
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(_GenerateTime);
         }
         if (Objects.Count == MaxNumObjects)
             yield break;
@@ -190,7 +192,10 @@ public class GameManager : MonoBehaviour
 
     public void QUIUpdate(EnemyType type)
     {
-        switch(type)
+        if (!ChackQuestData(type))
+            return;
+
+        switch (type)
         {
             case EnemyType.Zomib:
                 QuestData.T1 -= 1;
@@ -202,6 +207,27 @@ public class GameManager : MonoBehaviour
                 QuestData.T3 -= 1;
                 break;
         }
+    }
+
+    private bool ChackQuestData(EnemyType type)
+    {
+        switch (type)
+        {
+            case EnemyType.Zomib:
+                if (QuestData.T1 == 0)
+                    return false;
+                break;
+            case EnemyType.Thief:
+                if (QuestData.T2 == 0)
+                    return false;
+                break;
+            case EnemyType.Executioner:
+                if (QuestData.T3 == 0)
+                    return false;
+                break;
+        }
+        return true;
+
     }
 }
 
