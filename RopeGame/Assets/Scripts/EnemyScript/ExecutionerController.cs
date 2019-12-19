@@ -14,7 +14,7 @@ public class ExecutionerController : EnemyBase
 
     void Update()
     {
-        if (state != "Caught")
+        if (state != "Caught"&&state != "Die")
         {
             if (m_distance < MAXDISTANCE)
             {

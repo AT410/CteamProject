@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        this.gameObject.GetComponent<Rigidbody2D>().angularVelocity = 180;
         m_deleteTime -= Time.deltaTime;
         if (m_deleteTime < 0)
         {
@@ -24,7 +25,6 @@ public class Bullet : MonoBehaviour
         {
             PlayerHealthController.instance.DamagePlayer();
         }
-
         gameObject.SetActive(false);
     }
     /// <summary>
