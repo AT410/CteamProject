@@ -13,11 +13,8 @@ public class newHookShot : MonoBehaviour
     float nowDist;            //プレイヤーとオブジェクトの距離を格納する変数
     float hori, vert;         //コントローラーのx軸y軸を格納する変数
     float stickAngle = 0.65f; //コントローラースティックの傾き
-    float rollPower = 20;     //巻き取る力
-<<<<<<< HEAD
+    float rollPower = 25;     //巻き取る力
     int rollSe = 0;           //巻き取る際のSEの鳴る頻度
-=======
->>>>>>> shinozaki
     bool move = false;        //プレイヤーが移動しているか判断する変数
     bool horiVert = false;    //スティックの傾きが前回x軸y軸のどちらに傾いたかの変数
 
