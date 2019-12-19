@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1132730979646162440
 Transform:
   m_ObjectHideFlags: 0
@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 1211330291499060578}
   - component: {fileID: 1132730980313190262}
   - component: {fileID: 1132730980313190246}
+  - component: {fileID: 7752622849041377198}
   m_Layer: 10
   m_Name: Enemy_Zombie
   m_TagString: Enemy
@@ -258,6 +259,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7752622849041377198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132730980313190265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf15f78b4f008c54b9159a7d16680b10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5382240199819604418
 GameObject:
   m_ObjectHideFlags: 0

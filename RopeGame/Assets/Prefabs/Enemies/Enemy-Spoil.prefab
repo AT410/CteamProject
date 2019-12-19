@@ -187,6 +187,7 @@ MonoBehaviour:
   m_defalutSpeed: 0.04
   m_speed: 0.05
   playerDistance: 8
+  _enemyType: 1
   anim: {fileID: 0}
 --- !u!50 &5395499754810449723
 Rigidbody2D:
