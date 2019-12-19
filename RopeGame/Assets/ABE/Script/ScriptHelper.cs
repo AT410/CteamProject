@@ -116,14 +116,14 @@ public class GlobalCoroutine : MonoBehaviour
     }
 }
 
-public struct Event
+public struct MakeEvent
 {
     //イベント開始地点
     public Vector3 EventPoint;
     //開始地点までの移動スピード
     public float MoveSpeed;
 
-    public Event(Vector3 InEventPoint, float InMoveSpeed)
+    public MakeEvent(Vector3 InEventPoint, float InMoveSpeed)
     {
         EventPoint = InEventPoint;
         MoveSpeed = InMoveSpeed;
