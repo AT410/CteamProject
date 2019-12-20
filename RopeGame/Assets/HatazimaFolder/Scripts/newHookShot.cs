@@ -29,15 +29,12 @@ public class newHookShot : MonoBehaviour
         rope.SetActive(false);                 //ラインを使うまで隠しておく
     }
     
-    public void OnTriggerStay2D(Collider2D collision)
+    public void OnCollisionStay2D(Collision2D collision)
     {
-        if (!move)
+        if (collision.gameObject.CompareTag("Valley"))
         {
-            if (collision.gameObject.CompareTag("Valley"))
-            {
-                transform.position = new Vector3(0, 0, -1);
-                healthController.GetComponent<PlayerHealthController>().DamagePlayer();
-            }
+            transform.position = new Vector3(0, 0, -1);
+            healthController.GetComponent<PlayerHealthController>().DamagePlayer();
         }
     }
 

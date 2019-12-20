@@ -6,6 +6,8 @@ public class BossController : EnemyBase
 {
     private int tiredCount = 0;
     private float SERIOUS_DISTANCE = 2.0f;
+    [SerializeField]
+    private EnemyShot enemyShot;
 
     Animator anim;
     private string EnemyDeathEffect = "EnemyDeathEffect";
@@ -17,7 +19,7 @@ public class BossController : EnemyBase
         {
             if (m_distance < MAXDISTANCE)
             {
-              //  enemyShot.Shot();
+                enemyShot.Shot();
             }
             ActionPolicy();
         }
@@ -60,9 +62,9 @@ public class BossController : EnemyBase
     {
         if (m_distance < playerDistance - SERIOUS_DISTANCE*tiredCount)
         {
-            m_speed = 3.0f;
+           // m_speed = 3.0f;
             tiredCount += 1;
-            //newHookShot.RopeCut();
+            m_player.GetComponent<newHookShot>().RopeCut();
         }
         else
         {

@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
             {
                 activeMoveSpeed = dashSpeed;
                 dashCounter = dashLength;
-                EffectManager.instance.playInPlace(transform.position, DodgeEffect);
+                //EffectManager.instance.playInPlace(transform.position, DodgeEffect);
                 PlayerHealthController.instance.MakeInvincible(dashInvincibility);
             }
             dodge = true;

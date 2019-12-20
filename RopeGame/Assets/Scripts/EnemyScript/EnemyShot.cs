@@ -11,6 +11,8 @@ public class EnemyShot : MonoBehaviour
     [SerializeField]
     private float      m_speed       = 5;   //弾の速度
     private float      m_currentTime = 0;   //弾の発射カウント
+    [SerializeField]
+    private string objPoolName;
     private ObjectPool m_pool;              //ObjectPoolを格納
     private GameObject m_player;            //プレイヤーのgameobjectを格納
 
@@ -19,7 +21,7 @@ public class EnemyShot : MonoBehaviour
     private void Start()
     {
         m_player = GameObject.Find(PLAYERNAME);
-        m_pool = GameObject.Find("ObjectPool").GetComponent<ObjectPool>();//objectpoolのscriptを取得
+        m_pool = GameObject.Find(objPoolName).GetComponent<ObjectPool>();//objectpoolのscriptを取得
     }
     /// <summary>
     /// 弾発射関数

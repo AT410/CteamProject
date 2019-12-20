@@ -31,7 +31,7 @@ public struct CompletValue
     public float Chack100P()
     {
         var P = T1 + T2 + T3;
-        Debug.Log(P / All);
+        //Debug.Log(P / All);
         return 1.0f-(P / All);
     }
 }
@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
         //StartCoroutine(CreateObject());
         state.Update();
 
-        Debug.Log(QuestData.Chack100P());
+        //Debug.Log(QuestData.Chack100P());
         //ChackNumObj();
         //SleepObj();
     }

@@ -105,7 +105,6 @@ public class EnemyBase : MonoBehaviour
     /// </summary>
     protected void StateCheck()
     {
-        Debug.Log(state);
         switch (state)
         {
             case ("Approch"):
