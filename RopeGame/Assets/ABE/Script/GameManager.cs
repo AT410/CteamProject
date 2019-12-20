@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         //state.IsUpdateActive = false;
     }
 
-
+    public bool ClearFlag = false;
     /// <summary>
     /// オブジェクトデータ
     /// </summary>
@@ -125,6 +125,11 @@ public class GameManager : MonoBehaviour
             CreateQuest();
             state.IsUpdateActive = true;
         }
+
+        //if(Next.name =="GameClearScene")
+        //{
+        //    ClearFlag = true;
+        //}
         //gameObject.SetActive(true);
         return;
     }
@@ -224,6 +229,11 @@ public class GameManager : MonoBehaviour
             case EnemyType.Executioner:
                 if (QuestData.T3 == 0)
                     return false;
+                break;
+            case EnemyType.BOSS:
+                Test.Instance().ClearFlag = true;
+                //GameObject.Find("XMK").SetActive(true);
+                SceneManager.LoadScene("GameClearScene");
                 break;
         }
         return true;

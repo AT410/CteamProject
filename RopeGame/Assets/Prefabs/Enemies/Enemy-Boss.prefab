@@ -78,8 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_defalutSpeed: 0.05
   playerDistance: 10
-  _enemyType: 0
-  enemyShot: {fileID: 1398166028768867486}
+  _enemyType: 3
 --- !u!50 &20996223810314024
 Rigidbody2D:
   serializedVersion: 4

@@ -21,11 +21,9 @@ public class EventScript : MonoBehaviour
     //ステートマシン
     StateMachine<EventScript> state;
 
-    [SerializeField]
-    private GameObject MainCamera;
+    public GameObject MainCamera;
 
-    [SerializeField]
-    private GameObject Player;
+    public GameObject Player;
 
     public GameObject BossPrefub;
 
@@ -133,7 +131,7 @@ public class DefaultEventState : ObjState<EventScript>
 
     public override void Exit(ref EventScript other)
     {
-        
+        other.MainCamera.GetComponent<Cameracontroller>().enabled = false;
     }
 }
 
@@ -238,7 +236,7 @@ public class EventActiveState : ObjState<EventScript>
     {
         //イベントが発生するまで待機
         //イベントが発生したらイベントが実行ステートに遷移
-        if (TestTime>=5.0f)
+        if (TestTime>=3.0f)
         {
             other.GetStateMachine().ChangeState(GoToStartState.Instance());
         }
@@ -301,7 +299,7 @@ public class GoToStartState : ObjState<EventScript>
     public override void Exit(ref EventScript other)
     {
         //マネージャーにイベント終了を通知
-
+        other.MainCamera.GetComponent<Cameracontroller>().enabled = true;
     }
 
     private void Move(ref EventScript other)

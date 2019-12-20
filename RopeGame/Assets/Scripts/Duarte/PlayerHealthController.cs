@@ -8,7 +8,7 @@ public class PlayerHealthController : MonoBehaviour
 
     public static PlayerHealthController instance;
     private string PlayerDeathEffect = "PlayerDeathEffect";
-    public int currentHealth =5;
+    public int currentHealth;
     public int maxHealth;
     public string BloodEffect = "BloodEffect";
     float damageInvincLength = 1f;
@@ -44,7 +44,7 @@ public class PlayerHealthController : MonoBehaviour
     {
         if (invincCount <= 0)
         {
-            currentHealth--;
+            currentHealth-=1;
            // EffectManager.instance.playInPlace(PlayerController.instance.playerTrans.position, BloodEffect);
             invincCount = damageInvincLength;
             
