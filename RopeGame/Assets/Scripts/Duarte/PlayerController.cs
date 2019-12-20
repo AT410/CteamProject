@@ -57,8 +57,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0.0f))
+            return;
+
         //Functions
-        if(!isattacking)
+            if (!isattacking)
         {
             MovePlayer();
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// MakeCode:Abe Tatsuya
@@ -23,9 +24,14 @@ public struct CompletValue
         Del3 = Random.Range(3, 6);
 
         T1 = Del1;
-        T2 = 0;
-        T3 = 0;
+        T2 = Del2;
+        T3 = Del3;
         All = T1 + T2 + T3;
+    }
+
+    public float AllCount()
+    {
+        return All;
     }
 
     public float Chack100P()
@@ -123,6 +129,7 @@ public class GameManager : MonoBehaviour
         {
             //クエスト生成
             CreateQuest();
+            //MaxNumObjects = (int)QuestData.AllCount()+5;
             state.IsUpdateActive = true;
         }
 
@@ -168,9 +175,9 @@ public class GameManager : MonoBehaviour
     {
         while(Objects.Count != MaxNumObjects)
         {
-            int SelectNum  = Random.Range(0,EnemyPrefabs.Count);
-            var Pre = EnemyPrefabs[0];
-            Vector3 Pos = new Vector3(Random.Range(-4, 4), Random.Range(-4, 4));
+            int SelectNum  = Random.Range(0,EnemyPrefabs.Count-1);
+            var Pre = EnemyPrefabs[SelectNum];
+            Vector3 Pos = new Vector3(Random.Range(-18, 18), Random.Range(-4, 16));
             var s = GameObject.Instantiate(Pre, Pos,Quaternion.identity);
             Objects.Enqueue(s);
             yield return new WaitForSeconds(_GenerateTime);
@@ -204,6 +211,7 @@ public class GameManager : MonoBehaviour
         {
             case EnemyType.Zomib:
                 QuestData.T1 -= 1;
+                QuestUI.instance.UI2.SetActive(true);
                 break;
             case EnemyType.Thief:
                 QuestData.T2 -= 1;
@@ -220,15 +228,25 @@ public class GameManager : MonoBehaviour
         {
             case EnemyType.Zomib:
                 if (QuestData.T1 == 0)
+                {
+                    //QuestUI.instance.UI1.SetActive(true);
+                    Debug.Log("LLSOSOS");
                     return false;
+                }
                 break;
             case EnemyType.Thief:
                 if (QuestData.T2 == 0)
+                {
+                    //QuestUI.instance.UI2.SetActive(true);
                     return false;
+                }
                 break;
             case EnemyType.Executioner:
                 if (QuestData.T3 == 0)
+                {
+                    //QuestUI.instance.UI3.SetActive(true);
                     return false;
+                }
                 break;
             case EnemyType.BOSS:
                 Test.Instance().ClearFlag = true;
@@ -271,9 +289,9 @@ public class ExecuteSceneState : ObjState<GameManager>
 
     public override void Execute(ref GameManager other)
     {
-        if (Input.GetKeyDown("joystick button 9")||Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown("joystick button 9")||Input.GetKeyDown(KeyCode.E))
         {
-            other.GetStateMachine().ChangeState(BossSceneState.Instance());
+            other.GetStateMachine().ChangeState(PauseSceneState.Instance());
         }
         UpdateUI(ref other);
 
@@ -292,9 +310,10 @@ public class ExecuteSceneState : ObjState<GameManager>
             other.pauseUI.SetActive(true);
             //すべての更新を止める
             Time.timeScale = 0;
+            other.StopAllCoroutines();
         }
         //ToBossState
-        if(other.GetStateMachine().ChackNextState(BossSceneState.Instance()))
+        if (other.GetStateMachine().ChackNextState(BossSceneState.Instance()))
         {
             //クエストUIを非表示
             QuestUI.instance.enabled = false;

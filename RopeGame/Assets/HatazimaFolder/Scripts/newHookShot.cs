@@ -43,7 +43,10 @@ public class newHookShot : MonoBehaviour
 
     void Update()
     {
-        if(!move)
+        if (Mathf.Approximately(Time.timeScale, 0.0f))
+            return;
+
+        if (!move)
         {
             //縄を投げる
             if (Input.GetKeyDown("joystick button 5")) ObjectDesignation();

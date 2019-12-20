@@ -77,7 +77,20 @@ public class SelectKeyButton : MonoBehaviour
     public void ReturnClear()
     {
         SceneManager.LoadScene(0);
+        if(GameManager.GetGameManager().GetStateMachine().ChackState(PauseSceneState.Instance()))
+        {
+            GameManager.GetGameManager().GetStateMachine().ChangeState(ExecuteSceneState.Instance());
+        }
     }
+
+    public void ReturnGame()
+    {
+        if (GameManager.GetGameManager().GetStateMachine().ChackState(PauseSceneState.Instance()))
+        {
+            GameManager.GetGameManager().GetStateMachine().ChangeState(ExecuteSceneState.Instance());
+        }
+    }
+
 
     public void ShotSE()
     {

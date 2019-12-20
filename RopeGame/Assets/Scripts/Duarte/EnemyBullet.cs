@@ -16,6 +16,10 @@ public class EnemyBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0.0f))
+            return;
+
+
         transform.position += direction * speed * Time.deltaTime;
     }
 

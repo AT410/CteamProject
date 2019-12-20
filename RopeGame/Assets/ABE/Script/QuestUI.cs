@@ -18,9 +18,29 @@ public class QuestUI : MonoBehaviour
 
     public Text EnemyUI3;
 
+    public GameObject UI1;
+
+    public GameObject UI2;
+
+    public GameObject UI3;
+
     bool IsSetParam =false;
 
     CompletValue Value;
 
-    
+    private void Update()
+    {
+        if (EnemyUI1.text == "0")
+        {
+            UI1.SetActive(true);
+        }
+        if (EnemyUI2.text == "0")
+        {
+            UI2.SetActive(true);
+        }
+        if (EnemyUI3.text == "0")
+        {
+            UI3.SetActive(true);
+        }
+    }
 }
