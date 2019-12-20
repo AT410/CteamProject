@@ -11,12 +11,12 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     public Transform playerTrans;
 
-    //Movement variables
+    //動き変数Movement variables
     public float moveSpeed;
     private Vector2 moveInput;
     private float activeMoveSpeed;
 
-    //Dash variables
+    //回避変数 Dodge variables
     public float dashSpeed = 8f;
     public float dashLength = .5f;
     public float dashCooldown = 1f;
@@ -24,21 +24,22 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public float dashCounter;
     private float dashCoolCounter;
-    
-    //Attack variables
+
+    //動き変数 Attack variables
     [SerializeField]
     private float attackTime = 0.3f;
-    private bool attacking = false;
     private float attackTimeCounter;
-    public bool dodge = false;
-    
-   
-    //Spawn variables
-    Vector2 spawnpoint = Vector2.zero;
-
+    private bool attacking = false;
     public bool isattacking = false;
 
-    //Effects
+    //スキル変数 Skill variables
+    public bool dodge = false;
+
+
+    //スポーン変数Spawn variables
+    Vector2 spawnpoint = Vector2.zero;
+
+    //エフェクト変数 Effects
     private string DodgeEffect = "DodgeEffect";
 
     private void Awake()
@@ -46,7 +47,6 @@ public class PlayerController : MonoBehaviour
         instance = this;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         isattacking = false;
@@ -54,10 +54,8 @@ public class PlayerController : MonoBehaviour
         activeMoveSpeed = moveSpeed;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //Functions
         if(!isattacking)
         {
             MovePlayer();
@@ -66,7 +64,7 @@ public class PlayerController : MonoBehaviour
         Dodge();
     }
 
-    //Movement function
+    //動き関数 Movement function
     public void MovePlayer()
     {
         moveInput.x = Input.GetAxisRaw("Horizontal");
@@ -86,7 +84,8 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    //Attack function
+
+    //攻撃関数 Attack function
     public void Attack()
     {
         if (Input.GetButtonDown("Fire1"))
@@ -113,7 +112,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //Dodge function
+    //スキル関数（回避） Skill function (Dodge)
     public void Dodge()
     {
         if (Input.GetButtonDown("Dodge"))
@@ -148,13 +147,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //Get check point
-    public void getSpawnpoint(Vector2 point)
+    //チェックポイント関数 Check point function
+    public void getSpawnPoint(Vector2 point)
     {
         spawnpoint = point;
     }
-    //Respawn function
-    public void respawn()
+    //リスポーン関数 Respawn function
+    public void Respawn()
     {
         transform.position = spawnpoint;
     }

@@ -4,37 +4,32 @@ using UnityEngine;
 
 public class Breakables : MonoBehaviour
 {
+    //アイテムドロップ変数 Variables for item's drop
     public GameObject[] brokenPieces;
     public int maxPieces = 5;
-
     public bool shouldDropItem;
     public GameObject[] itemsToDrop;
     public float itemDropPercent;
-
     private string BoxDestroyEffect = "BoxDestroyEffect";
-    // Start is called before the first frame update
+
     void Start()
     {
-        
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
     }
-
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.tag == "Player")
         {
-            if(PlayerController.instance.dashCounter > 0)
+            //スキルでレベルオブジェクトを破壊するために To destroy the level's objets by skill
+            if (PlayerController.instance.dashCounter > 0)
             {
                 EffectManager.instance.playInPlace(transform.position, BoxDestroyEffect);
                 Destroy(gameObject);
 
-                //show broken pieces
+                //破壊されたレベルオブジェクトのパーツのドロップのために To drop the pieces of the broken level's objetcs
                 int piecesToDrop = Random.Range(1, maxPieces);
 
                 for(int i = 0; i < piecesToDrop; i++)
@@ -44,7 +39,7 @@ public class Breakables : MonoBehaviour
                     Instantiate(brokenPieces[randomPiece], transform.position, transform.rotation);
                 }
 
-                //drop items
+                //アイテムドロップ Drop items
                 if (shouldDropItem)
                 {
                     float dropChance = Random.Range(0f, 100f);
