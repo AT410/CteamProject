@@ -619,9 +619,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1759661213}
   - component: {fileID: 1759661209}
-  - component: {fileID: 1759661212}
-  - component: {fileID: 1759661211}
-  - component: {fileID: 1759661210}
   m_Layer: 0
   m_Name: ChangeScene
   m_TagString: Untagged
@@ -638,56 +635,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1759661208}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0bce3fbae24c4a4d9cf25032763f931, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eea40d773b77f64aa1471780aed6b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fadeTime: 10
-  fade: {fileID: 1759661212}
-  _SceneName: Title
-  Test: 0
-  _cangetype: 1
-  _fadetype: 0
-  IsRunning: 0
-  EndExe: 0
---- !u!114 &1759661210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759661208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf4c08949ad29a1479d5a7af03b2492c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 0f6fa64c62f949c4fafeeff64313d48e, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  maskTexture: {fileID: 2800000, guid: 011f9d58464673d44902fa23895e5972, type: 3}
-  cutoutRange: 1
---- !u!222 &1759661211
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759661208}
-  m_CullTransparentMesh: 0
---- !u!114 &1759661212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759661208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aaa5461bd84faf479d64bc7aa3a33f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsEnd: 0
-  cutoutRange: 1
+  _ChangeTime: 3
+  LoadScene: Title
 --- !u!224 &1759661213
 RectTransform:
   m_ObjectHideFlags: 0
