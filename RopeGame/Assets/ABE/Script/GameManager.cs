@@ -211,7 +211,6 @@ public class GameManager : MonoBehaviour
         {
             case EnemyType.Zomib:
                 QuestData.T1 -= 1;
-                QuestUI.instance.UI2.SetActive(true);
                 break;
             case EnemyType.Thief:
                 QuestData.T2 -= 1;

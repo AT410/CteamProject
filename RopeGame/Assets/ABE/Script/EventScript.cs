@@ -49,7 +49,7 @@ public class EventScript : MonoBehaviour
             Destroy(gameObject);
         }
         EventPool.Clear();
-        EventPool.Add("BossEvent", new MakeEvent(new Vector3(5, 5, 0), 1.0f));
+        EventPool.Add("BossEvent", new MakeEvent(new Vector3(0, 15.0f, 0), 1.0f));
     }
 
     // Start is called before the first frame update
@@ -244,7 +244,7 @@ public class EventActiveState : ObjState<EventScript>
     {
         //イベントが発生するまで待機
         //イベントが発生したらイベントが実行ステートに遷移
-        if (TestTime>=3.0f)
+        if (TestTime>=2.0f)
         {
             other.GetStateMachine().ChangeState(GoToStartState.Instance());
         }

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2366680021033182697
 Transform:
   m_ObjectHideFlags: 0
@@ -130,20 +130,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067cf8676f7367b4fb266f99389da16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
   theRB: {fileID: 2366680021219164503}
-  gunArm: {fileID: 2366680021033182697}
-  playerTrans: {fileID: 2366680021219164501}
-  anim: {fileID: 2366680021219164500}
-  bulletToFire: {fileID: 1055231132126804063, guid: 21568dd3970ccd849a70057a2a1d8d26,
-    type: 3}
-  firePoint: {fileID: 2366680022566392083}
-  TimeBetweenShots: 0.2
   bodySR: {fileID: 2366680022336844930}
+  anim: {fileID: 2366680021219164500}
+  playerTrans: {fileID: 2366680021219164501}
+  moveSpeed: 5
   dashSpeed: 8
   dashLength: 0.5
   dashCooldown: 1
   dashInvincibility: 0.5
+  dashCounter: 0
+  attackTime: 0.3
+  isattacking: 0
+  dodge: 0
 --- !u!58 &2366680021219164502
 CircleCollider2D:
   m_ObjectHideFlags: 0
