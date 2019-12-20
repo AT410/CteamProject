@@ -89,3 +89,11 @@ The following packages were removed:
   com.unity.ugui@1.0.0
   com.unity.xr.legacyinputhelpers@2.0.2
   com.unity.modules.androidjni@1.0.0
+
+=== Fri Dec 20 11:05:32 2019
+
+Packages were changed.
+Update Mode: resetToDefaultDependencies
+
+The following packages were removed:
+  com.unity.postprocessing@2.0.3-preview

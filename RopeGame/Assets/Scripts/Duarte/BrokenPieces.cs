@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class BrokenPieces : MonoBehaviour
 {
-    public float moveSpeed = 3f;
+    //レベルオブジェクトのパーツの変数Variables of the level object's parts
     private Vector3 moveDirection;
+    public float moveSpeed = 3f;
     public float deceleration = 5f;
-
-    public float lifetime = 3f;
-
-    public SpriteRenderer theSR;
     public float fadeSpeed = 2.5f;
-    // Start is called before the first frame update
+    public float lifetime = 3f;
+    public SpriteRenderer theSR;
+
     void Start()
     {
         moveDirection.x = Random.Range(-moveSpeed, moveSpeed);
         moveDirection.y = Random.Range(-moveSpeed, moveSpeed);
     }
 
-    // Update is called once per frame
+    //破壊されたレベルオブジェクトがだんだんなくなるために //To disappear the broken parts of the level's objects progressively
     void Update()
     {
         transform.position += moveDirection * Time.deltaTime;

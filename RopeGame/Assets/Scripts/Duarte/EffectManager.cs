@@ -8,6 +8,7 @@ public class EffectManager : MonoBehaviour
     Dictionary<string, Transform> particles = new Dictionary<string, Transform>();
     [SerializeField]
     ParticleSystem[] effects = null;
+
     private void Awake()
     {
         instance = this;
@@ -20,6 +21,8 @@ public class EffectManager : MonoBehaviour
             particles.Add(item.gameObject.name, item.transform);
         }
     }
+
+    //エフェクトのParticlesをとめるための関数 Function to stop the particles of the effects
     public void stopParticle(string name)
     {
         if (particles.ContainsKey(name))
@@ -31,6 +34,8 @@ public class EffectManager : MonoBehaviour
             Debug.Log("particle is can't finded");
         }
     }
+
+    //エフェクトのParticlesが出てくる場所を選ぶための関数 Function to select the place to spawn the particle"s effects
     public void playInPlace(Vector3 place, string name)
     {
         if (particles.ContainsKey(name))
