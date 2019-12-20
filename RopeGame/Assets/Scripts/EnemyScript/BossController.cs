@@ -14,6 +14,9 @@ public class BossController : EnemyBase
 
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0.0f))
+            return;
+
         Debug.Log(state);
         if (state != "Caught")
         {

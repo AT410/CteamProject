@@ -27,6 +27,9 @@ public class EventScript : MonoBehaviour
 
     public GameObject BossPrefub;
 
+    public GameObject UIS;
+    public GameObject Star;
+
     private string ActiveEventKey="NULL";
 
     public StateMachine<EventScript> GetStateMachine()
@@ -39,6 +42,7 @@ public class EventScript : MonoBehaviour
         if(_Ins == null)
         {
             _Ins = this;
+
         }
         else
         {
@@ -123,15 +127,17 @@ public class DefaultEventState : ObjState<EventScript>
     {
         //イベントが発生するまで待機
         //イベントが発生したらイベントが実行ステートに遷移
-        if(Input.GetKeyDown(KeyCode.Return))
-        {
-            other.GetStateMachine().ChangeState(GoToEventState.Instance());
-        }
+        //if(Input.GetKeyDown(KeyCode.Return))
+        //{
+        //    other.GetStateMachine().ChangeState(GoToEventState.Instance());
+        //}
     }
 
     public override void Exit(ref EventScript other)
     {
         other.MainCamera.GetComponent<Cameracontroller>().enabled = false;
+        other.UIS.SetActive(false);
+        other.Star.SetActive(false);
     }
 }
 
@@ -223,13 +229,15 @@ public class EventActiveState : ObjState<EventScript>
 
     private float TestTime = 0;
 
+    private GameObject Obj = null;
+
     public override void Enter(ref EventScript other)
     {
         Debug.Log("StartMove");
         //Bossの出現イベント開始
         var BossGeneratePos  = other.GetCameraPos();
         BossGeneratePos.z = 0;
-        GameObject.Instantiate(other.BossPrefub,BossGeneratePos,Quaternion.identity);
+        Obj = GameObject.Instantiate(other.BossPrefub,BossGeneratePos,Quaternion.identity);
     }
 
     public override void Execute(ref EventScript other)
@@ -300,6 +308,8 @@ public class GoToStartState : ObjState<EventScript>
     {
         //マネージャーにイベント終了を通知
         other.MainCamera.GetComponent<Cameracontroller>().enabled = true;
+        other.UIS.SetActive(true);
+        other.Star.SetActive(true);
     }
 
     private void Move(ref EventScript other)

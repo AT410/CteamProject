@@ -8,6 +8,9 @@ public class SpoilController : EnemyBase
 { 
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0.0f))
+            return;
+
         if (state != "Caught" && state != "Die")
         {
             if (state == "Sleep")

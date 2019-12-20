@@ -10,6 +10,9 @@ public class StarMove : MonoBehaviour
 
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0.0f))
+            return;
+
         if (canSee)
         {
             var h = Input.GetAxis("Horizontal2");

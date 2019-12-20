@@ -56,7 +56,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(!isattacking)
+        if (Mathf.Approximately(Time.timeScale, 0.0f))
+            return;
+
+        //Functions
+            if (!isattacking)
         {
             MovePlayer();
         }

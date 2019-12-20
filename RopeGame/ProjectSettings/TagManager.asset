@@ -12,6 +12,7 @@ TagManager:
   - FxTemporaire
   - Ground
   - Valley
+  - UI
   layers:
   - Default
   - TransparentFX

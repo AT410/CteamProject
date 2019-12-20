@@ -29,6 +29,11 @@ public class PlayerHealthController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!EventScript.Instance().GetStateMachine().ChackState(DefaultEventState.Instance()))
+        {
+            return;
+        }
+
         if(invincCount > 0)
         {
             invincCount -= Time.deltaTime;
