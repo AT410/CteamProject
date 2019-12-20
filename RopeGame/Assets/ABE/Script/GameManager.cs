@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
     {
         while(Objects.Count != MaxNumObjects)
         {
-            int SelectNum  = Random.Range(0,EnemyPrefabs.Count-1);
+            int SelectNum  = Random.Range(0,EnemyPrefabs.Count);
             var Pre = EnemyPrefabs[SelectNum];
             Vector3 Pos = new Vector3(Random.Range(-18, 18), Random.Range(-4, 16));
             var s = GameObject.Instantiate(Pre, Pos,Quaternion.identity);

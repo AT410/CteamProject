@@ -118,7 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_defalutSpeed: 0.04
   playerDistance: 6
-  _enemyType: 0
+  _enemyType: 1
 --- !u!212 &264772464671429580
 SpriteRenderer:
   m_ObjectHideFlags: 0

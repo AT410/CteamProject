@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece9d8d87b8c1ec4bb59abb5106379c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shotTime: 1
+  m_shotTime: 3
   m_speed: 5
   objPoolName: ObjectPool
 --- !u!212 &4925725634693261303
